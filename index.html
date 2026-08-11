@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173f35">
+<title>Daily Duas</title>
+<style>
+:root{--bg:#f5f2e9;--card:#fffdf8;--ink:#19352e;--muted:#68736e;--accent:#2f6b58;--gold:#b28a3b;--line:#e3ded1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:linear-gradient(135deg,#173f35,#285c4d);color:white;padding:28px 18px 34px;border-radius:0 0 28px 28px}
+.wrap{max-width:760px;margin:auto}.brand{font-size:14px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}.title{font-size:34px;margin:7px 0}.sub{opacity:.8}
+main{padding:18px}.refresh{background:#e9eee9;border:1px solid #d8e1db;padding:12px 14px;border-radius:14px;margin-bottom:16px;font-size:14px}
+.actions{display:flex;gap:8px;margin:12px 0 20px;flex-wrap:wrap}button,input{font:inherit}button{border:0;border-radius:12px;padding:10px 14px;background:var(--accent);color:white;cursor:pointer}button.secondary{background:white;color:var(--ink);border:1px solid var(--line)}
+.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:white;margin:10px 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin:14px 0;box-shadow:0 4px 16px #173f350b}.num{font-size:12px;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.arabic{font-family:serif;font-size:30px;line-height:1.8;text-align:right;margin:15px 0}.trans{font-style:italic;color:#4e5c56;line-height:1.6}.meaning{font-size:17px;line-height:1.6;margin-top:12px}.meta{font-size:13px;color:var(--muted);margin-top:14px}.bar{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 18px}.hidden{display:none}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">Daily Duas</div><div class="title">5 duas for today</div><div class="sub" id="date"></div></div></header>
+<main class="wrap">
+<div class="refresh">🌙 <b>New duas automatically at local midnight.</b> <span id="countdown"></span></div>
+<div class="actions"><button onclick="showToday()">Today's 5</button><button class="secondary" onclick="showLibrary()">Browse library</button></div>
+<section id="content"></section>
+</main>
+<footer>Prototype • The daily selection is calculated from the calendar date, so no manual daily update is needed.</footer>
+<script>
+const duas=[
+{id:1,cat:"Qur'an • Guidance",ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",tr:"Rabbanaa aatinaa fid-dunyaa hasanatan wa fil-aakhirati hasanatan wa qinaa 'adhaaban-naar.",en:"Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",ref:"Qur'an 2:201"},
+{id:2,cat:"Qur'an • Mercy",ar:"رَبِّ اغْفِرْ لِي وَارْحَمْنِي وَأَنْتَ خَيْرُ الرَّاحِمِينَ",tr:"Rabbighfir lee warhamnee wa anta khayrur-raahimeen.",en:"My Lord, forgive me and have mercy on me, and You are the best of those who show mercy.",ref:"Qur'an 23:118"},
+{id:3,cat:"Qur'an • Knowledge",ar:"رَبِّ زِدْنِي عِلْمًا",tr:"Rabbi zidnee 'ilmaa.",en:"My Lord, increase me in knowledge.",ref:"Qur'an 20:114"},
+{id:4,cat:"Qur'an • Parents",ar:"رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا",tr:"Rabbir hamhumaa kamaa rabbayaanee sagheeraa.",en:"My Lord, have mercy upon them as they raised me when I was small.",ref:"Qur'an 17:24"},
+{id:5,cat:"Qur'an • Ease",ar:"رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا",tr:"Rabbanaa laa tu'aakhidhnaa in naseenaa aw akhta'naa.",en:"Our Lord, do not impose blame upon us if we forget or make a mistake.",ref:"Qur'an 2:286"},
+{id:6,cat:"Qur'an • Steadfastness",ar:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً",tr:"Rabbanaa laa tuzigh quloobanaa ba'da idh hadaytanaa wa hab lanaa mil-ladunka rahmah.",en:"Our Lord, do not let our hearts deviate after You have guided us, and grant us mercy from You.",ref:"Qur'an 3:8"},
+{id:7,cat:"Qur'an • Reliance",ar:"حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ ۖ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",tr:"Hasbiyallaahu laa ilaaha illaa huwa, 'alayhi tawakkaltu wa huwa rabbul-'arshil-'azeem.",en:"Sufficient for me is Allah; there is no deity except Him. Upon Him I rely, and He is Lord of the Mighty Throne.",ref:"Qur'an 9:129"},
+{id:8,cat:"Qur'an • Protection",ar:"رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ",tr:"Rabbi a'oodhu bika min hamazaatish-shayaateeni wa a'oodhu bika rabbi an yahduroon.",en:"My Lord, I seek refuge in You from the incitements of the devils, and I seek refuge in You, my Lord, lest they be present with me.",ref:"Qur'an 23:97–98"},
+{id:9,cat:"Qur'an • Gratitude",ar:"رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ",tr:"Rabbi awzi'nee an ashkura ni'mataka allatee an'amta 'alayya wa 'alaa waalidayya.",en:"My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents.",ref:"Qur'an 46:15"},
+{id:10,cat:"Qur'an • Family",ar:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",tr:"Rabbanaa hab lanaa min azwaajinaa wa dhurriyyaatinaa qurrata a'yunin waj'alnaa lil-muttaqeena imaamaa.",en:"Our Lord, grant us from our spouses and offspring comfort to our eyes and make us an example for the righteous.",ref:"Qur'an 25:74"},
+{id:11,cat:"Qur'an • Building the House",ar:"رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ",tr:"Rabbanaa taqabbal minnaa innaka antas-samee'ul-'aleem.",en:"Our Lord, accept this from us. Indeed, You are the All-Hearing, the All-Knowing.",ref:"Qur'an 2:127"},
+{id:12,cat:"Qur'an • Submission",ar:"رَبَّنَا وَاجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِنْ ذُرِّيَّتِنَا أُمَّةً مُسْلِمَةً لَكَ وَأَرِنَا مَنَاسِكَنَا وَتُبْ عَلَيْنَا",tr:"Rabbanaa waj'alnaa muslimayni laka wa min dhurriyyatinaa ummatan muslimatan laka wa arinaa manaasikanaa wa tub 'alaynaa.",en:"Our Lord, make us submissive to You, and from our descendants a nation submissive to You. Show us our rites and accept our repentance.",ref:"Qur'an 2:128"},
+{id:13,cat:"Qur'an • Patience",ar:"رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ",tr:"Rabbanaa afrigh 'alaynaa sabran wa tawaffanaa muslimin.",en:"Our Lord, pour upon us patience and let us die as Muslims.",ref:"Qur'an 7:126"},
+{id:14,cat:"Qur'an • Forgiveness",ar:"رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",tr:"Rabbanaa zalamnaa anfusanaa wa il-lam taghfir lanaa wa tarhamnaa lanakoonanna minal-khaasireen.",en:"Our Lord, we have wronged ourselves. If You do not forgive us and have mercy on us, we will surely be among the losers.",ref:"Qur'an 7:23"},
+{id:15,cat:"Qur'an • Safety",ar:"رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِلَّذِينَ كَفَرُوا وَاغْفِرْ لَنَا رَبَّنَا إِنَّكَ أَنْتَ الْعَزِيزُ الْحَكِيمُ",tr:"Rabbanaa laa taj'alnaa fitnatan lilladheena kafaroo waghfir lanaa rabbanaa innaka antal-'azeezul-hakeem.",en:"Our Lord, do not make us a trial for those who disbelieve, and forgive us, our Lord. Indeed, You are the Exalted in Might, the Wise.",ref:"Qur'an 60:5"},
+{id:16,cat:"Qur'an • Faith",ar:"رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ",tr:"Rabbanaa innanaa aamannaa faghfir lanaa dhunoobanaa wa qinaa 'adhaaban-naar.",en:"Our Lord, indeed we have believed, so forgive us our sins and protect us from the punishment of the Fire.",ref:"Qur'an 3:16"},
+{id:17,cat:"Qur'an • Victory",ar:"رَبَّنَا اغْفِرْ لَنَا ذُنُوبَنَا وَإِسْرَافَنَا فِي أَمْرِنَا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",tr:"Rabbanaa aghfir lanaa dhunoobanaa wa israafanaa fee amrinaa wa thabbit aqdaamanaa wansurnaa 'alal-qawmil-kaafireen.",en:"Our Lord, forgive us our sins and our excesses in our affairs, make our feet firm, and give us victory over the disbelieving people.",ref:"Qur'an 3:147"},
+{id:18,cat:"Qur'an • Acceptance",ar:"رَبَّنَا آمَنَّا بِمَا أَنْزَلْتَ وَاتَّبَعْنَا الرَّسُولَ فَاكْتُبْنَا مَعَ الشَّاهِدِينَ",tr:"Rabbanaa aamannaa bimaa anzalta wattaba'nar-rasoola faktubnaa ma'ash-shaahideen.",en:"Our Lord, we have believed in what You revealed and followed the Messenger, so register us among the witnesses.",ref:"Qur'an 3:53"},
+{id:19,cat:"Qur'an • Light",ar:"رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",tr:"Rabbanā atmim lanā nūranā waghfir lanā innaka 'alā kulli shay'in qadīr.",en:"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.",ref:"Qur'an 66:8"},
+{id:20,cat:"Qur'an • Gratitude",ar:"رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ",tr:"Rabbi awzi'nee an ashkura ni'mataka wa an a'mala saalihan tardaah.",en:"My Lord, inspire me to be grateful for Your favor and to do righteousness that pleases You.",ref:"Qur'an 27:19"},
+{id:21,cat:"Qur'an • Family",ar:"رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ",tr:"Rabbi hab lee mil-ladunka dhurriyyatan tayyibatan innaka samee'ud-du'aa.",en:"My Lord, grant me from You a good offspring. Indeed, You are the Hearer of supplication.",ref:"Qur'an 3:38"},
+{id:22,cat:"Qur'an • Relief",ar:"رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",tr:"Rabbi innee limaa anzalta ilayya min khayrin faqeer.",en:"My Lord, indeed I am, for whatever good You would send down to me, in need.",ref:"Qur'an 28:24"},
+{id:23,cat:"Qur'an • Ease",ar:"رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي يَفْقَهُوا قَوْلِي",tr:"Rabbishrah lee sadree wa yassir lee amree wahlul 'uqdatan min lisaanee yafqahoo qawlee.",en:"My Lord, expand for me my chest, ease for me my task, and untie the knot from my tongue so they may understand my speech.",ref:"Qur'an 20:25–28"},
+{id:24,cat:"Qur'an • Refuge",ar:"رَبِّ أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ وَإِلَّا تَغْفِرْ لِي وَتَرْحَمْنِي أَكُنْ مِنَ الْخَاسِرِينَ",tr:"Rabbi a'oodhu bika an as'alaka maa laysa lee bihi 'ilm, wa illaa taghfir lee wa tarhamnee akun minal-khaasireen.",en:"My Lord, I seek refuge in You from asking You about that of which I have no knowledge. If You do not forgive me and have mercy upon me, I will be among the losers.",ref:"Qur'an 11:47"},
+{id:25,cat:"Qur'an • Distress",ar:"لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",tr:"Laa ilaaha illaa anta subhaanaka innee kuntu minaz-zaalimeen.",en:"There is no deity except You; glory be to You. Indeed, I have been among the wrongdoers.",ref:"Qur'an 21:87"},
+{id:26,cat:"Qur'an • Righteousness",ar:"رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",tr:"Rabbi hab lee hukman wa alhiqnee bis-saalihīn.",en:"My Lord, grant me wisdom and join me with the righteous.",ref:"Qur'an 26:83"},
+{id:27,cat:"Qur'an • Afterlife",ar:"رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ إِنَّ عَذَابَهَا كَانَ غَرَامًا",tr:"Rabbanaa isrif 'annaa 'adhaaba jahannama inna 'adhaabahaa kaana gharaamaa.",en:"Our Lord, turn away from us the punishment of Hell. Indeed, its punishment is inseparable.",ref:"Qur'an 25:65"},
+{id:28,cat:"Qur'an • Mercy",ar:"رَبَّنَا هَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",tr:"Rabbanaa hab lanaa mil-ladunka rahmatan wa hayyi' lanaa min amrinaa rashadaa.",en:"Our Lord, grant us mercy from Yourself and prepare for us from our affair right guidance.",ref:"Qur'an 18:10"},
+{id:29,cat:"Qur'an • Parents & Believers",ar:"رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",tr:"Rabbanaa aghfir lee wa liwaalidayya wa lil-mu'mineena yawma yaqoomul-hisaab.",en:"Our Lord, forgive me, my parents, and the believers on the Day the account is established.",ref:"Qur'an 14:41"},
+{id:30,cat:"Qur'an • Family",ar:"رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ",tr:"Rabbij'alnee muqeemas-salaati wa min dhurriyyatee rabbanaa wa taqabbal du'aa.",en:"My Lord, make me an establisher of prayer, and many from my descendants. Our Lord, accept my supplication.",ref:"Qur'an 14:40"},
+{id:31,cat:"Qur'an • Protection",ar:"رَبِّ نَجِّنِي مِنَ الْقَوْمِ الظَّالِمِينَ",tr:"Rabbi najjinee minal-qawmiz-zaalimeen.",en:"My Lord, save me from the wrongdoing people.",ref:"Qur'an 28:21"},
+{id:32,cat:"Qur'an • Hope",ar:"رَبِّ إِنِّي أَعُوذُ بِكَ أَنْ أَسْأَلَكَ مَا لَيْسَ لِي بِهِ عِلْمٌ",tr:"Rabbi innee a'oodhu bika an as'alaka maa laysa lee bihi 'ilm.",en:"My Lord, I seek refuge in You from asking You about that of which I have no knowledge.",ref:"Qur'an 11:47"},
+{id:33,cat:"Qur'an • Forgiveness",ar:"رَبَّنَا فَاغْفِرْ لَنَا ذُنُوبَنَا وَكَفِّرْ عَنَّا سَيِّئَاتِنَا وَتَوَفَّنَا مَعَ الْأَبْرَارِ",tr:"Rabbanaa faghfir lanaa dhunoobanaa wa kaffir 'annaa sayyi'aatinaa wa tawaffanaa ma'al-abraar.",en:"Our Lord, forgive us our sins, remove from us our misdeeds, and cause us to die with the righteous.",ref:"Qur'an 3:193"},
+{id:34,cat:"Qur'an • Guidance",ar:"رَبَّنَا إِنَّنَا سَمِعْنَا مُنَادِيًا يُنَادِي لِلْإِيمَانِ أَنْ آمِنُوا بِرَبِّكُمْ فَآمَنَّا",tr:"Rabbanaa innanaa sami'naa munaadiyan yunaadee lil-eemaani an aaminoo birabbikum fa aamannaa.",en:"Our Lord, indeed we heard a caller calling to faith, saying, 'Believe in your Lord,' and we believed.",ref:"Qur'an 3:193"},
+{id:35,cat:"Qur'an • Deliverance",ar:"رَبَّنَا أَخْرِجْنَا مِنْهَا فَإِنْ عُدْنَا فَإِنَّا ظَالِمُونَ",tr:"Rabbanaa akhrijnaa minhaa fa in 'udnaa fa innaa zaalimooun.",en:"Our Lord, remove us from it; then if we were to return to wrongdoing, we would indeed be wrongdoers.",ref:"Qur'an 23:107"},
+{id:36,cat:"Qur'an • Trust",ar:"رَبَّنَا عَلَيْكَ تَوَكَّلْنَا وَإِلَيْكَ أَنَبْنَا وَإِلَيْكَ الْمَصِيرُ",tr:"Rabbanaa 'alayka tawakkalnaa wa ilayka anabnaa wa ilaykal-maseer.",en:"Our Lord, upon You we have relied, and to You we have returned, and to You is the destination.",ref:"Qur'an 60:4"},
+{id:37,cat:"Qur'an • Hearts",ar:"رَبَّنَا لَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا رَبَّنَا إِنَّكَ رَءُوفٌ رَحِيمٌ",tr:"Rabbanaa laa taj'al fee quloobinaa ghillal-lilladheena aamanoo rabbanaa innaka ra'oofur-raheem.",en:"Our Lord, do not place in our hearts any resentment toward those who have believed. Our Lord, indeed You are Kind and Merciful.",ref:"Qur'an 59:10"},
+{id:38,cat:"Qur'an • Patience",ar:"رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ",tr:"Rabbanaa afrigh 'alaynaa sabran wa tawaffanaa muslimin.",en:"Our Lord, pour upon us patience and let us die as Muslims.",ref:"Qur'an 7:126"},
+{id:39,cat:"Qur'an • Victory",ar:"رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَثَبِّتْ أَقْدَامَنَا وَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ",tr:"Rabbanaa afrigh 'alaynaa sabran wa thabbit aqdaamanaa wansurnaa 'alal-qawmil-kaafireen.",en:"Our Lord, pour upon us patience, make our feet firm, and give us victory over the disbelieving people.",ref:"Qur'an 2:250"},
+{id:40,cat:"Qur'an • Guidance",ar:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ",tr:"Rabbanaa laa tuzigh quloobanaa ba'da idh hadaytanaa wa hab lanaa mil-ladunka rahmatan innaka antal-wahhaab.",en:"Our Lord, do not let our hearts deviate after You have guided us, and grant us mercy from Yourself. Indeed, You are the Bestower.",ref:"Qur'an 3:8"},
+{id:41,cat:"Qur'an • Wisdom",ar:"رَبَّنَا وَآتِنَا مَا وَعَدْتَنَا عَلَىٰ رُسُلِكَ وَلَا تُخْزِنَا يَوْمَ الْقِيَامَةِ إِنَّكَ لَا تُخْلِفُ الْمِيعَادَ",tr:"Rabbanaa wa aatinaa maa wa'adtanaa 'alaa rusulika wa laa tukhzinaa yawmal-qiyaamah.",en:"Our Lord, grant us what You promised us through Your messengers and do not disgrace us on the Day of Resurrection. Indeed, You do not fail in Your promise.",ref:"Qur'an 3:194"},
+{id:42,cat:"Qur'an • Safety",ar:"رَبَّنَا أَخْرِجْنَا مِنْ هَٰذِهِ الْقَرْيَةِ الظَّالِمِ أَهْلُهَا وَاجْعَلْ لَنَا مِنْ لَدُنْكَ وَلِيًّا وَاجْعَلْ لَنَا مِنْ لَدُنْكَ نَصِيرًا",tr:"Rabbanaa akhrijnaa min haadhihil-qaryatiz-zaalim ahluhaa waj'al lanaa mil-ladunka waliyyan waj'al lanaa mil-ladunka naseeraa.",en:"Our Lord, remove us from this city whose people are wrongdoers, and appoint for us from Yourself a protector and a helper.",ref:"Qur'an 4:75"},
+{id:43,cat:"Qur'an • Repentance",ar:"رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ",tr:"Rabbanaa aghfir lanaa wa li ikhwaaninal-ladheena sabaqoonaa bil-eemaan.",en:"Our Lord, forgive us and our brothers who preceded us in faith.",ref:"Qur'an 59:10"},
+{id:44,cat:"Qur'an • Contentment",ar:"رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً",tr:"Rabbi hab lee mil-ladunka dhurriyyatan tayyibah.",en:"My Lord, grant me from You a good offspring.",ref:"Qur'an 3:38"},
+{id:45,cat:"Qur'an • Righteousness",ar:"رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَصْلِحْ لِي فِي ذُرِّيَّتِي",tr:"Rabbi awzi'nee an ashkura ni'mataka wa an a'mala saalihan tardaahu wa aslih lee fee dhurriyyatee.",en:"My Lord, inspire me to be grateful for Your favor, to do righteousness that pleases You, and make my offspring righteous.",ref:"Qur'an 46:15"},
+{id:46,cat:"Qur'an • Worship",ar:"رَبَّنَا اجْعَلْنَا مُقِيمِي الصَّلَاةِ وَمِنْ ذُرِّيَّتِنَا رَبَّنَا وَتَقَبَّلْ دُعَاءِ",tr:"Rabbana-j'alnaa muqeemis-salaati wa min dhurriyyaatinaa rabbanaa wa taqabbal du'aa.",en:"Our Lord, make us establishers of prayer, and many from our descendants. Our Lord, accept my supplication.",ref:"Qur'an 14:40"},
+{id:47,cat:"Qur'an • Gratitude",ar:"رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ",tr:"Rabbi awzi'nee an ashkura ni'mataka allatee an'amta 'alayya.",en:"My Lord, inspire me to be grateful for Your favor which You have bestowed upon me.",ref:"Qur'an 27:19"},
+{id:48,cat:"Qur'an • Mercy",ar:"رَبَّنَا وَسِعْتَ كُلَّ شَيْءٍ رَحْمَةً وَعِلْمًا فَاغْفِرْ لِلَّذِينَ تَابُوا وَاتَّبَعُوا سَبِيلَكَ وَقِهِمْ عَذَابَ الْجَحِيمِ",tr:"Rabbanaa wasi'ta kulla shay'in rahmatan wa 'ilman faghfir lilladheena taaboo wattaba'oo sabeelaka wa qihim 'adhaabal-jaheem.",en:"Our Lord, You encompass all things in mercy and knowledge, so forgive those who repent and follow Your way, and protect them from the punishment of Hellfire.",ref:"Qur'an 40:7"},
+{id:49,cat:"Qur'an • Family",ar:"رَبَّنَا وَأَدْخِلْهُمْ جَنَّاتِ عَدْنٍ الَّتِي وَعَدْتَهُمْ وَمَنْ صَلَحَ مِنْ آبَائِهِمْ وَأَزْوَاجِهِمْ وَذُرِّيَّاتِهِمْ",tr:"Rabbanaa wa adkhilhum jannaati 'adnin allatee wa'adtahum wa man salaha min aabaa'ihim wa azwaajihim wa dhurriyyaatihim.",en:"Our Lord, admit them to gardens of perpetual residence which You have promised them, and whoever was righteous among their fathers, spouses and descendants.",ref:"Qur'an 40:8"},
+{id:50,cat:"Qur'an • Protection",ar:"رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",tr:"Rabbanaa atmim lanaa nooranaa waghfir lanaa innaka 'alaa kulli shay'in qadeer.",en:"Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent.",ref:"Qur'an 66:8"}
+];
+
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function todaySet(){
+ const key=new Date().toLocaleDateString('en-CA');
+ let seed=hash(key), arr=[...duas];
+ for(let i=arr.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;let j=seed%(i+1);[arr[i],arr[j]]=[arr[j],arr[i]]}
+ return arr.slice(0,5);
+}
+function card(d,i){
+ return `<article class="card"><div class="num">Dua ${i+1} • ${d.cat}</div><div class="arabic" dir="rtl">${d.ar}</div><div class="trans">${d.tr}</div><div class="meaning">${d.en}</div><div class="meta">Source: ${d.ref}</div><div class="bar"><button onclick="copyDua(${d.id})">Copy</button><button class="secondary" onclick="shareDua(${d.id})">Share</button></div></article>`;
+}
+function showToday(){document.getElementById('content').innerHTML=todaySet().map((d,i)=>card(d,i)).join('')}
+function showLibrary(){document.getElementById('content').innerHTML=`<input class="search" placeholder="Search duas..." oninput="filterLibrary(this.value)"><div id="library">${duas.map((d,i)=>card(d,i)).join('')}</div>`}
+function filterLibrary(q){document.getElementById('library').innerHTML=duas.filter(d=>(d.en+d.tr+d.cat+d.ref).toLowerCase().includes(q.toLowerCase())).map((d,i)=>card(d,i)).join('')}
+function copyDua(id){const d=duas.find(x=>x.id===id);navigator.clipboard?.writeText(`${d.ar}\n\n${d.en}\n\n${d.ref}`);alert("Dua copied")}
+function shareDua(id){const d=duas.find(x=>x.id===id);if(navigator.share)navigator.share({title:"Daily Dua",text:`${d.ar}\n\n${d.en}\n\n${d.ref}`});else copyDua(id)}
+function tick(){
+ const now=new Date(), next=new Date(now);next.setHours(24,0,0,0);let s=Math.max(0,next-now)/1000;
+ const h=Math.floor(s/3600),m=Math.floor(s%3600/60),sec=Math.floor(s%60);
+ document.getElementById('countdown').textContent=`New selection in ${h}h ${m}m ${sec}s`;
+ document.getElementById('date').textContent=now.toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+}
+showToday();tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
