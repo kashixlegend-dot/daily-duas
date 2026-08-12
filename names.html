@@ -1,0 +1,1421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173f35">
+<title>Names of Allah • Asma ul Husna</title>
+
+<style>
+:root{
+  --bg:#f5f2e9;
+  --card:#fffdf8;
+  --ink:#19352e;
+  --muted:#68736e;
+  --accent:#2f6b58;
+  --gold:#b28a3b;
+  --line:#e3ded1;
+  --soft:#e9eee9;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+}
+
+header{
+  background:linear-gradient(135deg,#173f35,#285c4d);
+  color:white;
+  padding:30px 18px 38px;
+  border-radius:0 0 30px 30px;
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+}
+
+.brand{
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.8;
+}
+
+.title{
+  font-size:34px;
+  margin:8px 0;
+}
+
+.sub{
+  opacity:.85;
+  line-height:1.6;
+}
+
+main{
+  padding:18px;
+}
+
+.intro{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:18px;
+  line-height:1.7;
+}
+
+.intro strong{
+  color:var(--accent);
+}
+
+.search{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:white;
+  color:var(--ink);
+  font-size:16px;
+  margin-bottom:14px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+button{
+  border:0;
+  border-radius:12px;
+  padding:10px 15px;
+  font:inherit;
+  cursor:pointer;
+  background:var(--accent);
+  color:white;
+}
+
+button.secondary{
+  background:white;
+  color:var(--ink);
+  border:1px solid var(--line);
+}
+
+button.active{
+  background:#173f35;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:21px;
+  margin:15px 0;
+  box-shadow:0 5px 18px #173f350b;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.number{
+  font-size:12px;
+  color:var(--gold);
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.star{
+  background:transparent;
+  color:#b28a3b;
+  border:1px solid var(--line);
+  border-radius:50%;
+  width:42px;
+  height:42px;
+  padding:0;
+  font-size:20px;
+}
+
+.star.saved{
+  background:#f4ead1;
+}
+
+.arabic{
+  font-family:serif;
+  font-size:36px;
+  line-height:1.8;
+  text-align:right;
+  margin:18px 0 8px;
+}
+
+.name{
+  font-size:25px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.trans{
+  color:var(--muted);
+  font-style:italic;
+  margin-top:4px;
+}
+
+.meaning{
+  font-size:18px;
+  font-weight:700;
+  margin-top:17px;
+}
+
+.explanation{
+  line-height:1.75;
+  margin-top:10px;
+}
+
+.reflection{
+  background:var(--soft);
+  border-radius:15px;
+  padding:14px;
+  margin-top:16px;
+  line-height:1.65;
+}
+
+.reflection b{
+  color:var(--accent);
+}
+
+.ref{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:15px;
+}
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  padding:35px 18px 50px;
+}
+
+@media(max-width:520px){
+  .title{font-size:30px}
+  .arabic{font-size:31px}
+  .name{font-size:23px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">Daily Duas • Asma ul Husna</div>
+    <div class="title">The Names of Allah</div>
+    <div class="sub">
+      Learn His beautiful names. Understand their meanings.
+      Let them shape your heart, your worship and your duas.
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="intro">
+    <strong>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</strong>
+    <br><br>
+    Allah has the most beautiful names. Learning them is not only
+    about memorising words — it is about knowing our Lord and calling
+    upon Him through His beautiful names.
+    <br><br>
+    <strong>Tip:</strong> Search for a name, save your favourites,
+    and take a moment to reflect on one name each day.
+  </div>
+
+  <input
+    id="search"
+    class="search"
+    placeholder="🔎 Search names, meanings or explanations..."
+    oninput="render()"
+  >
+
+  <div class="actions">
+    <button id="allBtn" class="active" onclick="setMode('all')">
+      All 99
+    </button>
+
+    <button id="favBtn" class="secondary" onclick="setMode('favorites')">
+      ⭐ My Favorites
+    </button>
+  </div>
+
+  <section id="content"></section>
+
+</main>
+
+<footer>
+  Asma ul Husna • The Beautiful Names of Allah
+  <br>
+  May learning these names increase us in faith, gratitude,
+  humility and love of Allah. Ameen.
+</footer>
+
+<script>
+
+const names = [
+
+{
+id:1,
+ar:"اللَّهُ",
+name:"Allah",
+meaning:"The One True God",
+explanation:"Allah is the proper name of our Creator and Lord. He alone deserves worship, and all creation depends upon Him.",
+reflection:"When you say Allah, remember that your worship, hope, fear, love and reliance belong ultimately to Him.",
+ref:"Qur'an 1:1–2"
+},
+
+{
+id:2,
+ar:"الرَّحْمَٰنُ",
+name:"Ar-Rahman",
+meaning:"The Universally Merciful",
+explanation:"Allah's mercy is vast and encompasses His creation. His mercy is evident in the countless blessings people receive every moment.",
+reflection:"Notice the mercy around you today and thank Ar-Rahman for blessings you normally overlook.",
+ref:"Qur'an 1:1; 17:110"
+},
+
+{
+id:3,
+ar:"الرَّحِيمُ",
+name:"Ar-Raheem",
+meaning:"The Especially Merciful",
+explanation:"Allah continually shows special mercy to His servants who turn to Him with faith, repentance and obedience.",
+reflection:"Never think you are too far from Allah's mercy to return to Him.",
+ref:"Qur'an 1:1; 33:43"
+},
+
+{
+id:4,
+ar:"الْمَلِكُ",
+name:"Al-Malik",
+meaning:"The King and Sovereign",
+explanation:"Allah owns and rules the heavens and the earth. His authority is complete and nothing escapes His command.",
+reflection:"When life feels outside your control, remember that the true King is in control.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:5,
+ar:"الْقُدُّوسُ",
+name:"Al-Quddus",
+meaning:"The Absolutely Pure and Holy",
+explanation:"Allah is completely free from every imperfection and every quality that does not befit His majesty.",
+reflection:"Let this name remind you to seek purity in your heart, intentions and actions.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:6,
+ar:"السَّلَامُ",
+name:"As-Salam",
+meaning:"The Source of Peace and Perfection",
+explanation:"Allah is perfect and free from every defect. True safety and peace are ultimately found through Him.",
+reflection:"Ask Allah for peace in your heart and for protection from what harms your faith.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:7,
+ar:"الْمُؤْمِنُ",
+name:"Al-Mu'min",
+meaning:"The Granter of Security",
+explanation:"Allah gives security, confirms truth and grants safety to whom He wills.",
+reflection:"When fear enters your heart, turn to the One who can give true security.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:8,
+ar:"الْمُهَيْمِنُ",
+name:"Al-Muhaymin",
+meaning:"The Guardian and Overseer",
+explanation:"Allah watches over His creation and has complete knowledge and authority over everything.",
+reflection:"You are never unseen by Allah. Let that bring comfort and accountability.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:9,
+ar:"الْعَزِيزُ",
+name:"Al-Aziz",
+meaning:"The Almighty",
+explanation:"Allah possesses complete strength, honour and power. No one can overcome His decree.",
+reflection:"Seek honour through obedience to Allah rather than through people's approval.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:10,
+ar:"الْجَبَّارُ",
+name:"Al-Jabbar",
+meaning:"The Restorer and Compeller",
+explanation:"Allah has absolute power and can mend what is broken, restore what is lost and bring creation under His authority.",
+reflection:"Bring your brokenness to Allah. He knows exactly what needs healing.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:11,
+ar:"الْمُتَكَبِّرُ",
+name:"Al-Mutakabbir",
+meaning:"The Supremely Great",
+explanation:"Allah possesses true greatness and majesty. Human beings have no right to arrogance before Him.",
+reflection:"Replace pride with gratitude. Every ability you have is ultimately a gift from Allah.",
+ref:"Qur'an 59:23"
+},
+
+{
+id:12,
+ar:"الْخَالِقُ",
+name:"Al-Khaliq",
+meaning:"The Creator",
+explanation:"Allah created everything with perfect knowledge and wisdom. Nothing exists independently of His creation.",
+reflection:"Look around you and let creation lead your heart toward its Creator.",
+ref:"Qur'an 59:24"
+},
+
+{
+id:13,
+ar:"الْبَارِئُ",
+name:"Al-Bari'",
+meaning:"The Originator",
+explanation:"Allah brings creation into existence in accordance with His perfect wisdom and order.",
+reflection:"Your existence is not meaningless. Allah created you with wisdom and purpose.",
+ref:"Qur'an 59:24"
+},
+
+{
+id:14,
+ar:"الْمُصَوِّرُ",
+name:"Al-Musawwir",
+meaning:"The Fashioner",
+explanation:"Allah gives every created thing its form, appearance and unique characteristics.",
+reflection:"Be grateful for how Allah created you, while remembering that true beauty is tied to righteousness.",
+ref:"Qur'an 59:24"
+},
+
+{
+id:15,
+ar:"الْغَفَّارُ",
+name:"Al-Ghaffar",
+meaning:"The Constantly Forgiving",
+explanation:"Allah repeatedly forgives His servants when they sincerely return to Him.",
+reflection:"Do not let repeated mistakes make you abandon repentance. Keep returning to Allah.",
+ref:"Qur'an 20:82"
+},
+
+{
+id:16,
+ar:"الْقَهَّارُ",
+name:"Al-Qahhar",
+meaning:"The Subduer",
+explanation:"Allah's power over creation is absolute. Nothing can escape His authority.",
+reflection:"When something feels overwhelmingly powerful, remember that Allah is greater.",
+ref:"Qur'an 13:16"
+},
+
+{
+id:17,
+ar:"الْوَهَّابُ",
+name:"Al-Wahhab",
+meaning:"The Bestower",
+explanation:"Allah gives generously and continuously without being in need of His creation.",
+reflection:"Ask Allah generously and recognise every good gift as coming from Him.",
+ref:"Qur'an 3:8"
+},
+
+{
+id:18,
+ar:"الرَّزَّاقُ",
+name:"Ar-Razzaq",
+meaning:"The Provider",
+explanation:"Allah provides for every creature. Provision includes food, opportunities, knowledge, relationships and countless other blessings.",
+reflection:"Work hard, but place your heart's reliance upon Ar-Razzaq.",
+ref:"Qur'an 51:58"
+},
+
+{
+id:19,
+ar:"الْفَتَّاحُ",
+name:"Al-Fattah",
+meaning:"The Opener",
+explanation:"Allah opens doors of mercy, knowledge, guidance and provision, and He judges between His servants with truth.",
+reflection:"When a door seems closed, ask Allah to open what is best for you.",
+ref:"Qur'an 34:26"
+},
+
+{
+id:20,
+ar:"الْعَلِيمُ",
+name:"Al-Alim",
+meaning:"The All-Knowing",
+explanation:"Allah knows everything: the past, present and future, what is public and what is hidden within the heart.",
+reflection:"Allah knows the struggle nobody else sees. Speak to Him honestly in dua.",
+ref:"Qur'an 2:32"
+},
+
+{
+id:21,
+ar:"الْقَابِضُ",
+name:"Al-Qabid",
+meaning:"The Withholder",
+explanation:"Allah may restrict provision or circumstances according to His wisdom. Restriction is never outside His knowledge.",
+reflection:"During hardship, remember that Allah's wisdom is greater than your immediate understanding.",
+ref:"Qur'an 2:245"
+},
+
+{
+id:22,
+ar:"الْبَاسِطُ",
+name:"Al-Basit",
+meaning:"The Expander",
+explanation:"Allah expands provision, mercy and circumstances according to His wisdom.",
+reflection:"Ask Allah to expand your heart toward faith, gratitude and goodness.",
+ref:"Qur'an 2:245"
+},
+
+{
+id:23,
+ar:"الْخَافِضُ",
+name:"Al-Khafid",
+meaning:"The One Who Lowers",
+explanation:"Allah lowers whom He wills according to His perfect justice and wisdom.",
+reflection:"Never become arrogant because circumstances favour you today.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:24,
+ar:"الرَّافِعُ",
+name:"Ar-Rafi'",
+meaning:"The One Who Raises",
+explanation:"Allah raises people in rank, honour and guidance according to His wisdom.",
+reflection:"Ask Allah to raise you through faith and good character rather than status alone.",
+ref:"Qur'an 58:11"
+},
+
+{
+id:25,
+ar:"الْمُعِزُّ",
+name:"Al-Mu'izz",
+meaning:"The Giver of Honour",
+explanation:"True honour belongs to Allah, and He grants it as He wills.",
+reflection:"Seek dignity by obeying Allah, not by chasing people's praise.",
+ref:"Qur'an 3:26"
+},
+
+{
+id:26,
+ar:"الْمُذِلُّ",
+name:"Al-Mudhill",
+meaning:"The One Who Humbles",
+explanation:"Allah can remove false pride and worldly power according to His justice and wisdom.",
+reflection:"Ask Allah to protect you from arrogance and humiliation through sin.",
+ref:"Qur'an 3:26"
+},
+
+{
+id:27,
+ar:"السَّمِيعُ",
+name:"As-Sami'",
+meaning:"The All-Hearing",
+explanation:"Allah hears every voice, every dua and even the words that are never spoken aloud.",
+reflection:"Your quietest dua is heard by Allah.",
+ref:"Qur'an 2:127"
+},
+
+{
+id:28,
+ar:"الْبَصِيرُ",
+name:"Al-Basir",
+meaning:"The All-Seeing",
+explanation:"Allah sees everything openly and secretly. Nothing escapes His sight.",
+reflection:"Let this name strengthen sincerity when nobody else is watching.",
+ref:"Qur'an 17:1"
+},
+
+{
+id:29,
+ar:"الْحَكَمُ",
+name:"Al-Hakam",
+meaning:"The Judge",
+explanation:"Allah is the ultimate judge, and His judgement is perfect and free from injustice.",
+reflection:"When you feel wronged, trust that Allah knows the complete truth.",
+ref:"Qur'an 6:114"
+},
+
+{
+id:30,
+ar:"الْعَدْلُ",
+name:"Al-Adl",
+meaning:"The Utterly Just",
+explanation:"Allah does not wrong anyone. His justice is perfect and His wisdom encompasses every judgement.",
+reflection:"Try to practise justice even when it is difficult for you.",
+ref:"Qur'an 4:40"
+},
+
+{
+id:31,
+ar:"اللَّطِيفُ",
+name:"Al-Latif",
+meaning:"The Subtle and Gentle",
+explanation:"Allah knows the hidden details of our lives and brings about good in ways we may not notice immediately.",
+reflection:"Some of Allah's greatest gifts may arrive through things you did not expect.",
+ref:"Qur'an 6:103"
+},
+
+{
+id:32,
+ar:"الْخَبِيرُ",
+name:"Al-Khabir",
+meaning:"The All-Aware",
+explanation:"Allah is completely aware of every detail, including intentions and hidden matters.",
+reflection:"Be sincere even when nobody knows what is in your heart.",
+ref:"Qur'an 67:14"
+},
+
+{
+id:33,
+ar:"الْحَلِيمُ",
+name:"Al-Halim",
+meaning:"The Forbearing",
+explanation:"Allah does not rush to punish despite knowing every sin. He gives His servants opportunities to repent and return.",
+reflection:"Practise patience with people when you would rather react harshly.",
+ref:"Qur'an 2:225"
+},
+
+{
+id:34,
+ar:"الْعَظِيمُ",
+name:"Al-Azim",
+meaning:"The Magnificent",
+explanation:"Allah's greatness is beyond human imagination. His majesty is greater than anything we can comprehend.",
+reflection:"When worries become huge, remember that Allah is greater than every worry.",
+ref:"Qur'an 2:255"
+},
+
+{
+id:35,
+ar:"الْغَفُورُ",
+name:"Al-Ghafur",
+meaning:"The Most Forgiving",
+explanation:"Allah forgives sins when His servants sincerely repent and seek His forgiveness.",
+reflection:"Make istighfar part of your daily life.",
+ref:"Qur'an 39:53"
+},
+
+{
+id:36,
+ar:"الشَّكُورُ",
+name:"Ash-Shakur",
+meaning:"The Appreciative",
+explanation:"Allah appreciates even small acts of sincere goodness and rewards them generously.",
+reflection:"Never underestimate a small good deed done sincerely for Allah.",
+ref:"Qur'an 35:30"
+},
+
+{
+id:37,
+ar:"الْعَلِيُّ",
+name:"Al-Aliyy",
+meaning:"The Most High",
+explanation:"Allah is exalted above His creation in majesty, power and greatness.",
+reflection:"Lift your heart toward Allah rather than becoming consumed by worldly status.",
+ref:"Qur'an 2:255"
+},
+
+{
+id:38,
+ar:"الْكَبِيرُ",
+name:"Al-Kabir",
+meaning:"The Most Great",
+explanation:"Allah is greater than everything. Nothing compares with His greatness.",
+reflection:"Say Allahu Akbar with awareness: Allah is greater.",
+ref:"Qur'an 13:9"
+},
+
+{
+id:39,
+ar:"الْحَفِيظُ",
+name:"Al-Hafiz",
+meaning:"The Preserver",
+explanation:"Allah preserves His creation and nothing is lost from His knowledge.",
+reflection:"Ask Allah to preserve your faith, family and heart.",
+ref:"Qur'an 11:57"
+},
+
+{
+id:40,
+ar:"الْمُقِيتُ",
+name:"Al-Muqit",
+meaning:"The Sustainer",
+explanation:"Allah provides what His creation needs and has power over every form of sustenance.",
+reflection:"Recognise every breath and every ability as a gift from Allah.",
+ref:"Qur'an 4:85"
+},
+
+{
+id:41,
+ar:"الْحَسِيبُ",
+name:"Al-Hasib",
+meaning:"The Reckoner and Sufficient",
+explanation:"Allah is sufficient for His servants and will hold everyone accountable with perfect knowledge.",
+reflection:"Do your best and leave the final outcome to Allah.",
+ref:"Qur'an 4:6"
+},
+
+{
+id:42,
+ar:"الْجَلِيلُ",
+name:"Al-Jalil",
+meaning:"The Majestic",
+explanation:"Allah possesses overwhelming majesty and honour.",
+reflection:"Let awareness of Allah's majesty bring humility into your worship.",
+ref:"Qur'an 55:27"
+},
+
+{
+id:43,
+ar:"الْكَرِيمُ",
+name:"Al-Karim",
+meaning:"The Most Generous",
+explanation:"Allah gives generously and honours His servants beyond what they deserve.",
+reflection:"Be generous with others because you hope for the generosity of Allah.",
+ref:"Qur'an 82:6"
+},
+
+{
+id:44,
+ar:"الرَّقِيبُ",
+name:"Ar-Raqib",
+meaning:"The Watchful",
+explanation:"Allah constantly watches over His creation and knows everything they do.",
+reflection:"Live with ihsan: worship Allah as though you see Him, knowing that He sees you.",
+ref:"Qur'an 4:1"
+},
+
+{
+id:45,
+ar:"الْمُجِيبُ",
+name:"Al-Mujib",
+meaning:"The One Who Responds",
+explanation:"Allah hears and responds to supplication according to His wisdom.",
+reflection:"Never believe your dua is ignored simply because the answer comes differently or later than expected.",
+ref:"Qur'an 11:61"
+},
+
+{
+id:46,
+ar:"الْوَاسِعُ",
+name:"Al-Wasi'",
+meaning:"The All-Encompassing",
+explanation:"Allah's knowledge, mercy, generosity and power are vast beyond our limits.",
+reflection:"When you feel your options are small, remember that Allah's possibilities are not limited like yours.",
+ref:"Qur'an 2:268"
+},
+
+{
+id:47,
+ar:"الْحَكِيمُ",
+name:"Al-Hakim",
+meaning:"The All-Wise",
+explanation:"Everything Allah does is based upon perfect wisdom, even when we cannot understand it immediately.",
+reflection:"Trust Allah's wisdom when life does not unfold according to your plan.",
+ref:"Qur'an 2:129"
+},
+
+{
+id:48,
+ar:"الْوَدُودُ",
+name:"Al-Wadud",
+meaning:"The Most Loving",
+explanation:"Allah is loving and beloved by His righteous servants. His love is a profound mercy and honour.",
+reflection:"Ask Allah to fill your heart with sincere love for Him.",
+ref:"Qur'an 11:90"
+},
+
+{
+id:49,
+ar:"الْمَجِيدُ",
+name:"Al-Majid",
+meaning:"The Most Glorious",
+explanation:"Allah possesses perfect glory, honour and greatness.",
+reflection:"Glorify Allah when you recognise His blessings.",
+ref:"Qur'an 11:73"
+},
+
+{
+id:50,
+ar:"الْبَاعِثُ",
+name:"Al-Ba'ith",
+meaning:"The Resurrector",
+explanation:"Allah will resurrect creation after death and bring everyone before Him.",
+reflection:"Remembering resurrection helps us keep today's choices connected to the Hereafter.",
+ref:"Qur'an 22:7"
+},
+
+{
+id:51,
+ar:"الشَّهِيدُ",
+name:"Ash-Shahid",
+meaning:"The Witness",
+explanation:"Allah is witness over everything that happens and nothing is hidden from Him.",
+reflection:"Your private deeds matter because Allah is always aware of them.",
+ref:"Qur'an 4:79"
+},
+
+{
+id:52,
+ar:"الْحَقُّ",
+name:"Al-Haqq",
+meaning:"The Absolute Truth",
+explanation:"Allah is the ultimate reality and truth. His promises, words and judgement are true.",
+reflection:"Build your life around what is true rather than what is merely popular.",
+ref:"Qur'an 22:6"
+},
+
+{
+id:53,
+ar:"الْوَكِيلُ",
+name:"Al-Wakil",
+meaning:"The Trustee and Disposer of Affairs",
+explanation:"Allah is the One upon whom believers rely and entrust their affairs.",
+reflection:"Take the means available to you, then place your trust in Allah.",
+ref:"Qur'an 3:173"
+},
+
+{
+id:54,
+ar:"الْقَوِيُّ",
+name:"Al-Qawiyy",
+meaning:"The All-Strong",
+explanation:"Allah possesses perfect strength and nothing can weaken Him.",
+reflection:"When you feel weak, seek strength from Allah.",
+ref:"Qur'an 22:40"
+},
+
+{
+id:55,
+ar:"الْمَتِينُ",
+name:"Al-Matin",
+meaning:"The Firm and Steadfast",
+explanation:"Allah's strength is absolute, enduring and never diminished.",
+reflection:"Allah does not become tired of hearing you. Keep turning to Him.",
+ref:"Qur'an 51:58"
+},
+
+{
+id:56,
+ar:"الْوَلِيُّ",
+name:"Al-Waliyy",
+meaning:"The Protecting Friend",
+explanation:"Allah is the true ally and protector of the believers.",
+reflection:"Seek Allah's friendship through faith, obedience and remembrance.",
+ref:"Qur'an 2:257"
+},
+
+{
+id:57,
+ar:"الْحَمِيدُ",
+name:"Al-Hamid",
+meaning:"The Praiseworthy",
+explanation:"Allah deserves praise for who He is, His perfection and His countless blessings.",
+reflection:"Say Alhamdulillah not only when things go your way, but as recognition of Allah Himself.",
+ref:"Qur'an 14:8"
+},
+
+{
+id:58,
+ar:"الْمُحْصِي",
+name:"Al-Muhsi",
+meaning:"The One Who Counts All",
+explanation:"Allah encompasses and records everything. Nothing is forgotten or lost from His knowledge.",
+reflection:"Every good deed matters, even when nobody notices it.",
+ref:"Qur'an 72:28"
+},
+
+{
+id:59,
+ar:"الْمُبْدِئُ",
+name:"Al-Mubdi'",
+meaning:"The Originator",
+explanation:"Allah originates creation and brings things into existence from nothing.",
+reflection:"The One who created you can also create a new chapter in your life.",
+ref:"Qur'an 10:34"
+},
+
+{
+id:60,
+ar:"الْمُعِيدُ",
+name:"Al-Mu'id",
+meaning:"The Restorer",
+explanation:"Allah can return creation after death and restore what He wills.",
+reflection:"Never think a situation is permanently beyond Allah's ability to change.",
+ref:"Qur'an 85:13"
+},
+
+{
+id:61,
+ar:"الْمُحْيِي",
+name:"Al-Muhyi",
+meaning:"The Giver of Life",
+explanation:"Allah gives life and brings life from what appears dead.",
+reflection:"Ask Allah to bring spiritual life to your heart.",
+ref:"Qur'an 30:50"
+},
+
+{
+id:62,
+ar:"الْمُمِيتُ",
+name:"Al-Mumit",
+meaning:"The Giver of Death",
+explanation:"Allah controls life and death. Every soul ultimately returns to Him.",
+reflection:"Remembering death can help us live with purpose rather than fear.",
+ref:"Qur'an 3:156"
+},
+
+{
+id:63,
+ar:"الْحَيُّ",
+name:"Al-Hayy",
+meaning:"The Ever-Living",
+explanation:"Allah's life is perfect, everlasting and independent. He never dies or weakens.",
+reflection:"Turn to the Ever-Living One when everything else feels temporary.",
+ref:"Qur'an 2:255"
+},
+
+{
+id:64,
+ar:"الْقَيُّومُ",
+name:"Al-Qayyum",
+meaning:"The Self-Sustaining Sustainer",
+explanation:"Allah depends on nobody while every part of creation depends upon Him.",
+reflection:"Your heart can rest when it remembers who is sustaining your life.",
+ref:"Qur'an 2:255"
+},
+
+{
+id:65,
+ar:"الْوَاجِدُ",
+name:"Al-Wajid",
+meaning:"The One Who Finds and Perceives",
+explanation:"Allah is never lacking and nothing escapes His knowledge or power.",
+reflection:"Allah knows exactly what you need, even before you can express it.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:66,
+ar:"الْمَاجِدُ",
+name:"Al-Majid",
+meaning:"The Noble and Glorious",
+explanation:"Allah is perfect in nobility, generosity and glory.",
+reflection:"Honour Allah by honouring what He has commanded.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:67,
+ar:"الْوَاحِدُ",
+name:"Al-Wahid",
+meaning:"The One",
+explanation:"Allah is uniquely One in His lordship, worship and perfection.",
+reflection:"Let tawhid simplify your heart: worship Allah alone.",
+ref:"Qur'an 13:16"
+},
+
+{
+id:68,
+ar:"الْأَحَدُ",
+name:"Al-Ahad",
+meaning:"The Absolutely One",
+explanation:"Allah is uniquely and completely One, without partner or equal.",
+reflection:"Nothing deserves the kind of worship and ultimate dependence that belongs to Allah alone.",
+ref:"Qur'an 112:1"
+},
+
+{
+id:69,
+ar:"الصَّمَدُ",
+name:"As-Samad",
+meaning:"The Eternal Refuge",
+explanation:"Allah is the One upon whom all creation depends while He depends on nobody.",
+reflection:"Take your deepest needs to As-Samad.",
+ref:"Qur'an 112:2"
+},
+
+{
+id:70,
+ar:"الْقَادِرُ",
+name:"Al-Qadir",
+meaning:"The All-Capable",
+explanation:"Allah has power over all things and nothing can prevent what He wills.",
+reflection:"Never limit what you ask Allah for because of what seems impossible to you.",
+ref:"Qur'an 6:65"
+},
+
+{
+id:71,
+ar:"الْمُقْتَدِرُ",
+name:"Al-Muqtadir",
+meaning:"The Perfectly Powerful",
+explanation:"Allah's power is complete and effective. His decree cannot be defeated.",
+reflection:"Trust Allah when circumstances appear beyond your control.",
+ref:"Qur'an 54:55"
+},
+
+{
+id:72,
+ar:"الْمُقَدِّمُ",
+name:"Al-Muqaddim",
+meaning:"The One Who Brings Forward",
+explanation:"Allah brings forward what He wills according to His perfect wisdom.",
+reflection:"Do not panic when your timeline differs from someone else's.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:73,
+ar:"الْمُؤَخِّرُ",
+name:"Al-Mu'akhkhir",
+meaning:"The One Who Delays",
+explanation:"Allah delays what He wills for wisdom, protection or a greater outcome.",
+reflection:"A delay is not necessarily a denial.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:74,
+ar:"الْأَوَّلُ",
+name:"Al-Awwal",
+meaning:"The First",
+explanation:"Allah existed before everything. Nothing preceded Him.",
+reflection:"Remember that Allah was there before your problems existed.",
+ref:"Qur'an 57:3"
+},
+
+{
+id:75,
+ar:"الْآخِرُ",
+name:"Al-Akhir",
+meaning:"The Last",
+explanation:"Allah remains after everything else passes away.",
+reflection:"Give greater attention to what will remain in the Hereafter.",
+ref:"Qur'an 57:3"
+},
+
+{
+id:76,
+ar:"الظَّاهِرُ",
+name:"Az-Zahir",
+meaning:"The Manifest and Most High",
+explanation:"Allah's signs and authority are evident throughout creation, while He is exalted above His creation.",
+reflection:"Look at creation as signs pointing your heart toward its Creator.",
+ref:"Qur'an 57:3"
+},
+
+{
+id:77,
+ar:"الْبَاطِنُ",
+name:"Al-Batin",
+meaning:"The Hidden and Near",
+explanation:"Allah knows the innermost realities of creation and nothing hidden is beyond Him.",
+reflection:"Allah knows the thoughts you cannot explain to anyone else.",
+ref:"Qur'an 57:3"
+},
+
+{
+id:78,
+ar:"الْمُتَعَالِي",
+name:"Al-Muta'ali",
+meaning:"The Most Exalted",
+explanation:"Allah is exalted above every limitation and above all that is falsely attributed to Him.",
+reflection:"Glorify Allah above every imperfect idea of Him.",
+ref:"Qur'an 13:9"
+},
+
+{
+id:79,
+ar:"الْبَرُّ",
+name:"Al-Barr",
+meaning:"The Source of Goodness",
+explanation:"Allah is immensely kind and good to His servants, showing them generosity and care.",
+reflection:"Think of one kindness Allah has given you today.",
+ref:"Qur'an 52:28"
+},
+
+{
+id:80,
+ar:"التَّوَّابُ",
+name:"At-Tawwab",
+meaning:"The Accepter of Repentance",
+explanation:"Allah repeatedly accepts sincere repentance from His servants.",
+reflection:"Make tawbah quickly instead of allowing shame to keep you away from Allah.",
+ref:"Qur'an 2:37"
+},
+
+{
+id:81,
+ar:"الْمُنْتَقِمُ",
+name:"Al-Muntaqim",
+meaning:"The One Who Justly Takes Retribution",
+explanation:"Allah's justice includes holding persistent wrongdoing accountable.",
+reflection:"Leave ultimate justice to Allah and protect your own heart from revenge and ظلم.",
+ref:"Qur'an 32:22"
+},
+
+{
+id:82,
+ar:"الْعَفُوُّ",
+name:"Al-Afuww",
+meaning:"The Pardoner",
+explanation:"Allah can erase and pardon sins, especially when His servants sincerely turn to Him.",
+reflection:"Ask Allah for pardon and learn to pardon others.",
+ref:"Qur'an 4:43"
+},
+
+{
+id:83,
+ar:"الرَّؤُوفُ",
+name:"Ar-Ra'uf",
+meaning:"The Extremely Kind",
+explanation:"Allah is extraordinarily gentle and compassionate toward His servants.",
+reflection:"Treat people gently because you love the gentleness of Allah.",
+ref:"Qur'an 9:117"
+},
+
+{
+id:84,
+ar:"مَالِكُ الْمُلْكِ",
+name:"Malik al-Mulk",
+meaning:"Owner of All Dominion",
+explanation:"All authority ultimately belongs to Allah. Whatever people possess is temporary and entrusted to them.",
+reflection:"Use whatever authority or wealth you have as an amanah.",
+ref:"Qur'an 3:26"
+},
+
+{
+id:85,
+ar:"ذُو الْجَلَالِ وَالْإِكْرَامِ",
+name:"Dhul-Jalali wal-Ikram",
+meaning:"Possessor of Majesty and Honour",
+explanation:"Allah possesses both overwhelming majesty and perfect generosity and honour.",
+reflection:"Worship Allah with both awe and hope.",
+ref:"Qur'an 55:27"
+},
+
+{
+id:86,
+ar:"الْمُقْسِطُ",
+name:"Al-Muqsit",
+meaning:"The Perfectly Just",
+explanation:"Allah establishes justice and gives everyone their due without ظلم.",
+reflection:"Practise fairness even when it does not benefit you personally.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:87,
+ar:"الْجَامِعُ",
+name:"Al-Jami'",
+meaning:"The Gatherer",
+explanation:"Allah gathers His creation and will gather humanity on the Day of Resurrection.",
+reflection:"Remember that our final meeting before Allah is certain.",
+ref:"Qur'an 3:9"
+},
+
+{
+id:88,
+ar:"الْغَنِيُّ",
+name:"Al-Ghani",
+meaning:"The Self-Sufficient",
+explanation:"Allah needs nothing while every created thing needs Him.",
+reflection:"Do not measure your worth by what you possess. Your Lord is Al-Ghani.",
+ref:"Qur'an 35:15"
+},
+
+{
+id:89,
+ar:"الْمُغْنِي",
+name:"Al-Mughni",
+meaning:"The Enricher",
+explanation:"Allah enriches whom He wills with material and spiritual provision.",
+reflection:"Ask Allah for richness of heart, not only richness of possessions.",
+ref:"Qur'an 53:48"
+},
+
+{
+id:90,
+ar:"الْمَانِعُ",
+name:"Al-Mani'",
+meaning:"The Preventer",
+explanation:"Allah can prevent harm and withhold what He knows would not be good for His servants.",
+reflection:"Sometimes what Allah prevents is itself a mercy.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:91,
+ar:"الضَّارُّ",
+name:"Ad-Darr",
+meaning:"The One in Whose Decree Harm Occurs",
+explanation:"Nothing harmful can occur outside Allah's knowledge and decree. His wisdom encompasses what we experience as hardship.",
+reflection:"During hardship, seek Allah rather than assuming hardship means abandonment.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:92,
+ar:"النَّافِعُ",
+name:"An-Nafi'",
+meaning:"The Benefactor",
+explanation:"All true benefit ultimately comes by Allah's permission and generosity.",
+reflection:"Ask Allah to make what benefits you good for your faith and life.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:93,
+ar:"النُّورُ",
+name:"An-Nur",
+meaning:"The Light",
+explanation:"Allah is described as the Light of the heavens and earth, and He guides hearts from darkness toward truth.",
+reflection:"Ask Allah to illuminate your heart with guidance.",
+ref:"Qur'an 24:35"
+},
+
+{
+id:94,
+ar:"الْهَادِي",
+name:"Al-Hadi",
+meaning:"The Guide",
+explanation:"Allah guides people to truth and shows the way to what is good.",
+reflection:"Make guidance one of your most frequent duas.",
+ref:"Qur'an 22:54"
+},
+
+{
+id:95,
+ar:"الْبَدِيعُ",
+name:"Al-Badi'",
+meaning:"The Incomparable Originator",
+explanation:"Allah creates in a unique and unmatched manner without needing a previous example.",
+reflection:"Creation is full of signs of Allah's unmatched creativity and wisdom.",
+ref:"Qur'an 2:117"
+},
+
+{
+id:96,
+ar:"الْبَاقِي",
+name:"Al-Baqi",
+meaning:"The Everlasting",
+explanation:"Allah remains forever while everything created eventually passes away.",
+reflection:"Invest your heart in what lasts beyond this temporary world.",
+ref:"Qur'an 55:27"
+},
+
+{
+id:97,
+ar:"الْوَارِثُ",
+name:"Al-Warith",
+meaning:"The Ultimate Inheritor",
+explanation:"Everything returns to Allah. What people possess is temporary, while Allah's dominion remains.",
+reflection:"Hold worldly possessions lightly and use them for lasting good.",
+ref:"Qur'an 15:23"
+},
+
+{
+id:98,
+ar:"الرَّشِيدُ",
+name:"Ar-Rashid",
+meaning:"The Guide to Right Wisdom",
+explanation:"Allah guides toward what is correct and wise, and His actions are never without perfect wisdom.",
+reflection:"Ask Allah to guide your decisions, not merely your desires.",
+ref:"Traditional enumeration of the Divine Names"
+},
+
+{
+id:99,
+ar:"الصَّبُورُ",
+name:"As-Sabur",
+meaning:"The Most Patient",
+explanation:"Allah is not hasty in dealing with His servants. His wisdom and forbearance are perfect.",
+reflection:"Learn patience from remembering that Allah gives time for repentance and growth.",
+ref:"Traditional enumeration of the Divine Names"
+}
+
+];
+
+let mode="all";
+
+function getFavorites(){
+  try{
+    return JSON.parse(localStorage.getItem("allahFavorites") || "[]");
+  }catch(e){
+    return [];
+  }
+}
+
+function isFavorite(id){
+  return getFavorites().includes(id);
+}
+
+function toggleFavorite(id){
+  let fav=getFavorites();
+
+  if(fav.includes(id)){
+    fav=fav.filter(x=>x!==id);
+  }else{
+    fav.push(id);
+  }
+
+  localStorage.setItem("allahFavorites",JSON.stringify(fav));
+  render();
+}
+
+function setMode(newMode){
+  mode=newMode;
+
+  document.getElementById("allBtn").className =
+    mode==="all" ? "active" : "secondary";
+
+  document.getElementById("favBtn").className =
+    mode==="favorites" ? "active" : "secondary";
+
+  render();
+}
+
+function card(n){
+
+  const saved=isFavorite(n.id);
+
+  return `
+  <article class="card">
+
+    <div class="top">
+
+      <div>
+        <div class="number">
+          Name ${n.id} of 99
+        </div>
+      </div>
+
+      <button
+        class="star ${saved ? "saved" : ""}"
+        onclick="toggleFavorite(${n.id})"
+        aria-label="Favorite"
+      >
+        ${saved ? "★" : "☆"}
+      </button>
+
+    </div>
+
+    <div class="arabic" dir="rtl">
+      ${n.ar}
+    </div>
+
+    <div class="name">
+      ${n.name}
+    </div>
+
+    <div class="trans">
+      ${n.name}
+    </div>
+
+    <div class="meaning">
+      ${n.meaning}
+    </div>
+
+    <div class="explanation">
+      ${n.explanation}
+    </div>
+
+    <div class="reflection">
+      <b>💚 Reflect:</b>
+      ${n.reflection}
+    </div>
+
+    <div class="ref">
+      📖 Reference: ${n.ref}
+    </div>
+
+  </article>
+  `;
+}
+
+function render(){
+
+  const q=document
+    .getElementById("search")
+    .value
+    .trim()
+    .toLowerCase();
+
+  let list=names;
+
+  if(mode==="favorites"){
+    list=list.filter(n=>isFavorite(n.id));
+  }
+
+  if(q){
+    list=list.filter(n=>
+      (
+        n.name+" "+
+        n.ar+" "+
+        n.meaning+" "+
+        n.explanation+" "+
+        n.reflection+" "+
+        n.ref
+      ).toLowerCase().includes(q)
+    );
+  }
+
+  const content=document.getElementById("content");
+
+  if(list.length===0){
+
+    content.innerHTML=`
+      <div class="empty">
+        <div style="font-size:40px">🌙</div>
+        <h3>No names found</h3>
+        <p>Try another search or add some names to your favourites.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  content.innerHTML=list.map(card).join("");
+}
+
+render();
+
+</script>
+
+</body>
+</html>
