@@ -364,7 +364,7 @@ button.secondary{
 </main>
 
 <script>
-
+const API = "https://api.quranpedia.net/v1/mushafs/3/";
 
 
 /*
@@ -560,7 +560,7 @@ async function loadSurah(number){
 
     const data = await response.json();
 
-    currentAyahs = Array.isArray(data) ? data : [];
+    currentAyahs currentAyahs = Array.isArray(data) ? data : [];
 
     const names = surahs[number-1];
 
