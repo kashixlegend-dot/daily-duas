@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#173f35">
-
 <title>Qur'an — Daily Duas</title>
 
 <style>
@@ -16,7 +15,8 @@
   --green:#2f6b58;
   --dark:#173f35;
   --gold:#b28a3b;
-  --line:#e3ded1;
+  --line:#ded8c9;
+  --white:#fff;
 }
 
 *{box-sizing:border-box}
@@ -25,112 +25,234 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
 .nav{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
   justify-content:center;
-  padding:18px;
+  gap:10px;
+  padding:16px 12px;
   background:var(--dark);
+  border-bottom:1px solid rgba(255,255,255,.15);
 }
 
 .nav a{
-  color:white;
+  color:#fff;
   text-decoration:none;
-  padding:10px 14px;
+  padding:12px 16px;
   border-radius:999px;
-  background:var(--green);
-  font-weight:600;
+  background:#2f765f;
+  font-weight:700;
+  font-size:15px;
 }
 
 .nav a:hover{
-  background:var(--gold);
-}
-
-header{
-  background:linear-gradient(145deg,#173f35,#2f6b58);
-  color:white;
-  padding:35px 20px 45px;
-  border-radius:0 0 38px 38px;
+  background:#3d866e;
 }
 
 .wrap{
-  max-width:900px;
+  width:min(900px,94%);
   margin:auto;
 }
 
+.hero{
+  background:linear-gradient(135deg,#173f35,#2f6b58);
+  color:white;
+  padding:28px 20px;
+  border-radius:0 0 35px 35px;
+}
+
 .brand{
-  font-size:18px;
-  letter-spacing:3px;
-  text-transform:uppercase;
+  font-size:14px;
+  letter-spacing:4px;
   opacity:.85;
+  margin-bottom:12px;
 }
 
-h1{
-  font-size:48px;
-  line-height:1.05;
-  margin:25px 0 15px;
+.hero h1{
+  margin:0;
+  font-size:38px;
 }
 
-.hero-text{
-  font-size:19px;
-  line-height:1.7;
+.hero p{
+  margin:10px 0 0;
+  font-size:17px;
+  line-height:1.6;
   opacity:.9;
 }
 
-main{
-  max-width:900px;
-  margin:25px auto;
-  padding:0 16px;
+.controls{
+  background:var(--card);
+  margin:18px 0;
+  padding:16px;
+  border-radius:22px;
+  border:1px solid var(--line);
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
-.card{
+.control-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+select,
+button{
+  width:100%;
+  border:1px solid #cfc8b8;
+  border-radius:12px;
+  background:white;
+  color:var(--ink);
+  padding:12px;
+  font-size:15px;
+}
+
+button{
+  cursor:pointer;
+  background:var(--green);
+  color:white;
+  border:none;
+  font-weight:700;
+}
+
+button.secondary{
+  background:#e8e2d4;
+  color:var(--ink);
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.reader-card{
   background:var(--card);
   border:1px solid var(--line);
-  border-radius:28px;
-  padding:28px;
-  margin-bottom:20px;
-  box-shadow:0 8px 25px rgba(25,53,46,.06);
+  border-radius:25px;
+  padding:18px 14px;
+  margin-bottom:30px;
+  box-shadow:0 5px 25px rgba(0,0,0,.05);
 }
 
-.card h2{
-  margin-top:0;
+.surah-title{
+  text-align:center;
+  padding:12px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:12px;
+}
+
+.surah-title .arabic-name{
+  font-size:30px;
+  font-weight:700;
+  direction:rtl;
+}
+
+.surah-title .english-name{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.bismillah{
+  text-align:center;
+  direction:rtl;
+  font-family:"Noto Nastaliq Urdu","Noto Nastaliq","Jameel Noori Nastaleeq",serif;
   font-size:28px;
+  margin:14px 0;
+}
+
+.quran-page{
+  direction:rtl;
+  text-align:justify;
+  font-family:"Noto Nastaliq Urdu","Noto Nastaliq","Jameel Noori Nastaleeq",serif;
+  font-size:27px;
+  line-height:2.55;
+  color:#172f29;
+  padding:12px 5px;
+}
+
+/*
+  13-line mode:
+  The reader is given the height and spacing of a
+  13-line Hifz-style reading page.
+*/
+.quran-page.mode13{
+  min-height:calc(13 * 2.55em);
 }
 
 .ayah{
-  font-size:24px;
-  line-height:2;
-  text-align:right;
-  direction:rtl;
-  margin:20px 0;
+  display:inline;
 }
 
-.translation{
-  color:var(--muted);
-  font-size:17px;
-  line-height:1.7;
-}
-
-.reference{
+.ayah-number{
+  display:inline-flex;
+  direction:ltr;
+  align-items:center;
+  justify-content:center;
+  width:1.65em;
+  height:1.65em;
+  margin:0 .15em;
+  border:1px solid var(--gold);
+  border-radius:50%;
   color:var(--gold);
-  font-weight:700;
-  margin-top:15px;
+  font-family:Arial,sans-serif;
+  font-size:.48em;
+  vertical-align:middle;
 }
 
-footer{
+.status{
   text-align:center;
-  padding:40px 20px;
   color:var(--muted);
+  padding:18px;
+}
+
+.error{
+  color:#9a3d32;
+  background:#fff0ed;
+  border-radius:12px;
+  padding:14px;
+  margin:10px 0;
+}
+
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  padding:20px;
 }
 
 @media(max-width:600px){
-  h1{font-size:38px}
-  .card{padding:22px}
-  .ayah{font-size:21px}
+  .hero h1{
+    font-size:32px;
+  }
+
+  .control-row{
+    grid-template-columns:1fr;
+  }
+
+  .quran-page{
+    font-size:25px;
+    line-height:2.55;
+  }
+
+  .nav{
+    gap:7px;
+  }
+
+  .nav a{
+    padding:10px 13px;
+    font-size:13px;
+  }
 }
 </style>
 </head>
@@ -139,58 +261,428 @@ footer{
 
 <nav class="nav">
   <a href="index.html">🏠 Home</a>
-  <a href="duas.html#duas">🤲 Duas</a>
+  <a href="duas.html">🙌 Duas</a>
   <a href="names.html">🕋 Allah's Names</a>
   <a href="quran.html">📖 Qur'an</a>
   <a href="favorites.html">⭐ Favorites</a>
 </nav>
 
-<header>
+<header class="hero">
   <div class="wrap">
-    <div class="brand">🌙 Daily Duas</div>
-
+    <div class="brand">🌙 DAILY DUAS</div>
     <h1>📖 Qur'an</h1>
-
-    <p class="hero-text">
-      A peaceful place to reflect on the words of Allah
-      and carry their guidance into everyday life.
+    <p>
+      Read the Qur'an in a peaceful IndoPak-style Nastaleeq
+      presentation.
     </p>
   </div>
 </header>
 
-<main>
+<main class="wrap">
 
-  <section class="card">
-    <h2>🌿 A verse for today</h2>
+<section class="controls">
 
-    <p class="ayah">
-      فَإِنَّ مَعَ الْعُسْرِ يُسْرًا
-    </p>
+  <div class="control-row">
 
-    <p class="translation">
-      “Indeed, with hardship comes ease.”
-    </p>
+    <div>
+      <label for="surahSelect">🕌 Surah</label>
+      <select id="surahSelect"></select>
+    </div>
 
-    <p class="reference">
-      Qur'an 94:5
-    </p>
-  </section>
+    <div>
+      <label for="juzSelect">📚 Juz</label>
+      <select id="juzSelect"></select>
+    </div>
 
-  <section class="card">
-    <h2>🤲 Reflect</h2>
+  </div>
 
-    <p class="translation">
-      Take a moment to read the verse slowly, think about its
-      meaning, and ask Allah to help you live by its guidance.
-    </p>
-  </section>
+  <div class="control-row">
+
+    <div>
+      <label for="fontSize">🔤 Text size</label>
+      <select id="fontSize">
+        <option value="23">Small</option>
+        <option value="27" selected>Medium</option>
+        <option value="31">Large</option>
+        <option value="35">Extra large</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="mode">📖 Reading mode</label>
+      <select id="mode">
+        <option value="13" selected>13-line Hifz mode</option>
+        <option value="normal">Normal</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="buttons">
+    <button class="secondary" id="previousBtn">◀ Previous</button>
+    <button id="nextBtn">Next ▶</button>
+  </div>
+
+</section>
+
+<section class="reader-card">
+
+  <div id="status" class="status">
+    Loading Qur'an…
+  </div>
+
+  <div id="reader" hidden>
+
+    <div class="surah-title">
+      <div id="arabicName" class="arabic-name"></div>
+      <div id="englishName" class="english-name"></div>
+    </div>
+
+    <div id="bismillah" class="bismillah">
+      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+    </div>
+
+    <div id="quranPage" class="quran-page mode13"></div>
+
+  </div>
+
+</section>
+
+<div class="footer">
+  Qur'an text powered by Quranpedia API.
+  <br>
+  Built for Daily Duas 🤲
+</div>
 
 </main>
 
-<footer>
-  Daily Duas 🌙<br>
-  Built with the intention of spreading beneficial reminders.
-</footer>
+<script>
+
+const API = "https://api.quranpedia.net/v1";
+
+/*
+  Quranpedia Mushaf ID 3 =
+  Hafs Nastaleeq / IndoPak-style Mushaf.
+*/
+const MUSHAF_ID = 3;
+
+const surahs = [
+["الفاتحة","Al-Fatihah"],
+["البقرة","Al-Baqarah"],
+["آل عمران","Aal-Imran"],
+["النساء","An-Nisa"],
+["المائدة","Al-Ma'idah"],
+["الأنعام","Al-An'am"],
+["الأعراف","Al-A'raf"],
+["الأنفال","Al-Anfal"],
+["التوبة","At-Tawbah"],
+["يونس","Yunus"],
+["هود","Hud"],
+["يوسف","Yusuf"],
+["الرعد","Ar-Ra'd"],
+["إبراهيم","Ibrahim"],
+["الحجر","Al-Hijr"],
+["النحل","An-Nahl"],
+["الإسراء","Al-Isra"],
+["الكهف","Al-Kahf"],
+["مريم","Maryam"],
+["طه","Ta-Ha"],
+["الأنبياء","Al-Anbiya"],
+["الحج","Al-Hajj"],
+["المؤمنون","Al-Mu'minun"],
+["النور","An-Nur"],
+["الفرقان","Al-Furqan"],
+["الشعراء","Ash-Shu'ara"],
+["النمل","An-Naml"],
+["القصص","Al-Qasas"],
+["العنكبوت","Al-Ankabut"],
+["الروم","Ar-Rum"],
+["لقمان","Luqman"],
+["السجدة","As-Sajdah"],
+["الأحزاب","Al-Ahzab"],
+["سبإ","Saba"],
+["فاطر","Fatir"],
+["يس","Ya-Sin"],
+["الصافات","As-Saffat"],
+["ص","Sad"],
+["الزمر","Az-Zumar"],
+["غافر","Ghafir"],
+["فصلت","Fussilat"],
+["الشورى","Ash-Shura"],
+["الزخرف","Az-Zukhruf"],
+["الدخان","Ad-Dukhan"],
+["الجاثية","Al-Jathiyah"],
+["الأحقاف","Al-Ahqaf"],
+["محمد","Muhammad"],
+["الفتح","Al-Fath"],
+["الحجرات","Al-Hujurat"],
+["ق","Qaf"],
+["الذاريات","Adh-Dhariyat"],
+["الطور","At-Tur"],
+["النجم","An-Najm"],
+["القمر","Al-Qamar"],
+["الرحمن","Ar-Rahman"],
+["الواقعة","Al-Waqi'ah"],
+["الحديد","Al-Hadid"],
+["المجادلة","Al-Mujadilah"],
+["الحشر","Al-Hashr"],
+["الممتحنة","Al-Mumtahanah"],
+["الصف","As-Saff"],
+["الجمعة","Al-Jumu'ah"],
+["المنافقون","Al-Munafiqun"],
+["التغابن","At-Taghabun"],
+["الطلاق","At-Talaq"],
+["التحريم","At-Tahrim"],
+["الملك","Al-Mulk"],
+["القلم","Al-Qalam"],
+["الحاقة","Al-Haqqah"],
+["المعارج","Al-Ma'arij"],
+["نوح","Nuh"],
+["الجن","Al-Jinn"],
+["المزمل","Al-Muzzammil"],
+["المدثر","Al-Muddaththir"],
+["القيامة","Al-Qiyamah"],
+["الإنسان","Al-Insan"],
+["المرسلات","Al-Mursalat"],
+["النبإ","An-Naba"],
+["النازعات","An-Nazi'at"],
+["عبس","Abasa"],
+["التكوير","At-Takwir"],
+["الإنفطار","Al-Infitar"],
+["المطففين","Al-Mutaffifin"],
+["الإنشقاق","Al-Inshiqaq"],
+["البروج","Al-Buruj"],
+["الطارق","At-Tariq"],
+["الأعلى","Al-A'la"],
+["الغاشية","Al-Ghashiyah"],
+["الفجر","Al-Fajr"],
+["البلد","Al-Balad"],
+["الشمس","Ash-Shams"],
+["الليل","Al-Layl"],
+["الضحى","Ad-Duha"],
+["الشرح","Ash-Sharh"],
+["التين","At-Tin"],
+["العلق","Al-Alaq"],
+["القدر","Al-Qadr"],
+["البينة","Al-Bayyinah"],
+["الزلزلة","Az-Zalzalah"],
+["العاديات","Al-Adiyat"],
+["القارعة","Al-Qari'ah"],
+["التكاثر","At-Takathur"],
+["العصر","Al-Asr"],
+["الهمزة","Al-Humazah"],
+["الفيل","Al-Fil"],
+["قريش","Quraysh"],
+["الماعون","Al-Ma'un"],
+["الكوثر","Al-Kawthar"],
+["الكافرون","Al-Kafirun"],
+["النصر","An-Nasr"],
+["المسد","Al-Masad"],
+["الإخلاص","Al-Ikhlas"],
+["الفلق","Al-Falaq"],
+["الناس","An-Nas"]
+];
+
+/*
+  Standard Juz starting points.
+  These are used for navigation and filtering.
+*/
+const juzStarts = [
+[1,1],[2,142],[2,253],[3,93],[4,24],
+[4,148],[5,82],[6,111],[7,88],[8,41],
+[9,93],[11,6],[12,53],[15,1],[17,1],
+[18,75],[21,1],[23,1],[25,21],[27,56],
+[29,1],[33,31],[36,28],[39,32],[41,47],
+[46,1],[51,31],[58,1],[67,1],[78,1]
+];
+
+const surahSelect = document.getElementById("surahSelect");
+const juzSelect = document.getElementById("juzSelect");
+const quranPage = document.getElementById("quranPage");
+const status = document.getElementById("status");
+const reader = document.getElementById("reader");
+const arabicName = document.getElementById("arabicName");
+const englishName = document.getElementById("englishName");
+const bismillah = document.getElementById("bismillah");
+const fontSize = document.getElementById("fontSize");
+const mode = document.getElementById("mode");
+
+let currentSurah = 1;
+let currentAyahs = [];
+
+function buildSelectors(){
+
+  surahs.forEach((s,i)=>{
+    const option = document.createElement("option");
+    option.value = i+1;
+    option.textContent = `${i+1}. ${s[1]} — ${s[0]}`;
+    surahSelect.appendChild(option);
+  });
+
+  for(let i=1;i<=30;i++){
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = `Juz ${i}`;
+    juzSelect.appendChild(option);
+  }
+}
+
+function escapeHtml(text){
+  return text
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+async function loadSurah(number){
+
+  currentSurah = number;
+
+  status.hidden = false;
+  reader.hidden = true;
+  status.textContent = "Loading Qur'an…";
+
+  try{
+
+    const response =
+      await fetch(`${API}/mushafs/${MUSHAF_ID}/${number}`);
+
+    if(!response.ok){
+      throw new Error("Could not load the Qur'an.");
+    }
+
+    const data = await response.json();
+
+    currentAyahs = Array.isArray(data) ? data : data.ayahs || [];
+
+    const names = surahs[number-1];
+
+    arabicName.textContent = names[0];
+    englishName.textContent =
+      `${number}. ${names[1]} — ${currentAyahs.length} ayahs`;
+
+    /*
+      Don't show Bismillah before At-Tawbah.
+    */
+    bismillah.style.display =
+      number === 9 ? "none" : "block";
+
+    quranPage.innerHTML =
+      currentAyahs.map(ayah => {
+
+        const text = escapeHtml(ayah.text || "");
+
+        return `
+          <span class="ayah">
+            ${text}
+            <span class="ayah-number">
+              ${ayah.number}
+            </span>
+          </span>
+        `;
+
+      }).join(" ");
+
+    status.hidden = true;
+    reader.hidden = false;
+
+    surahSelect.value = number;
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }catch(error){
+
+    status.hidden = false;
+    reader.hidden = true;
+
+    status.innerHTML = `
+      <div class="error">
+        Could not load the Qur'an right now.
+        Please check your internet connection and try again.
+      </div>
+    `;
+  }
+}
+
+function getJuzStart(juz){
+
+  const start = juzStarts[juz-1];
+
+  return {
+    surah:start[0],
+    ayah:start[1]
+  };
+}
+
+function goToJuz(juz){
+
+  const start = getJuzStart(juz);
+
+  loadSurah(start.surah).then(()=>{
+
+    setTimeout(()=>{
+
+      const target =
+        document.querySelector(
+          `.ayah:nth-child(${Math.max(1,start.ayah)})`
+        );
+
+      if(target){
+        target.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+      }
+
+    },300);
+
+  });
+}
+
+surahSelect.addEventListener("change",()=>{
+  loadSurah(Number(surahSelect.value));
+});
+
+juzSelect.addEventListener("change",()=>{
+  goToJuz(Number(juzSelect.value));
+});
+
+document.getElementById("previousBtn")
+.addEventListener("click",()=>{
+  if(currentSurah > 1){
+    loadSurah(currentSurah - 1);
+  }
+});
+
+document.getElementById("nextBtn")
+.addEventListener("click",()=>{
+  if(currentSurah < 114){
+    loadSurah(currentSurah + 1);
+  }
+});
+
+fontSize.addEventListener("change",()=>{
+  quranPage.style.fontSize =
+    fontSize.value + "px";
+});
+
+mode.addEventListener("change",()=>{
+
+  if(mode.value === "13"){
+    quranPage.classList.add("mode13");
+  }else{
+    quranPage.classList.remove("mode13");
+  }
+
+});
+
+buildSelectors();
+loadSurah(1);
+
+</script>
 
 </body>
 </html>
