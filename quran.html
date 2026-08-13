@@ -550,9 +550,8 @@ async function loadSurah(number){
   status.textContent = "Loading Qur'an…";
 
   try{
-
-    const response =
-      await fetch(`${API}/${number}`);
+const response =
+  await fetch(`${API}${number}`);
 
     if(!response.ok){
       throw new Error("Could not load the Qur'an.");
