@@ -608,8 +608,8 @@ async function loadSurah(number){
 
     status.innerHTML = `
       <div class="error">
-        Could not load the Qur'an right now.
-        Please check your internet connection and try again.
+        <strong>Qur'an loading error:</strong><br><br>
+        ${error.message}
       </div>
     `;
   }
