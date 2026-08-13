@@ -557,7 +557,7 @@ const response =
       throw new Error("Could not load the Qur'an.");
     }
 
-    const data = await response.json();
+    const data = await response.text();
 
     currentAyahs = Array.isArray(data) ? data : (data.verses || []);
 
