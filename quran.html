@@ -570,7 +570,7 @@ async function loadSurah(number){
     quranPage.innerHTML =
       currentAyahs.map(ayah => {
 
-        const text = escapeHtml(ayah.text || "");
+        const text = ayah.text || "";
 
         return `
           <span class="ayah">
