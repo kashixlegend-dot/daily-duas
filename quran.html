@@ -559,7 +559,18 @@ const response =
 
     const data = await response.text();
 
-    currentAyahs = Array.isArray(data) ? data : (data.verses || []);
+    const currentAyahs = data
+  .split(/\r?\n/)
+  .filter(line => line.trim())
+  .map(line => {
+    const [surah, ayah, ...text] = line.split("|");
+    return {
+      surah: Number(surah),
+      number: Number(ayah),
+      text_indopak: text.join("|")
+    };
+  })
+  .filter(ayah => ayah.surah === number);
 
     const names = surahs[number-1];
 
