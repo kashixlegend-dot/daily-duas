@@ -168,10 +168,51 @@ footer{
     grid-template-columns:1fr 1fr 1fr;
   }
 }
-</style>
+.nav{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  padding:14px 18px;
+  background:#173f35;
+  border-bottom:1px solid #2f6b58;
+}
+
+.nav a{
+  color:#fffdf8;
+  text-decoration:none;
+  padding:10px 14px;
+  border-radius:999px;
+  background:#2f6b58;
+  font-weight:600;
+  font-size:14px;
+}
+
+.nav a:hover{
+  background:#b28a3b;
+}
+
+@media(max-width:600px){
+  .nav{
+    gap:7px;
+    padding:10px;
+  }
+
+  .nav a{
+    padding:8px 10px;
+    font-size:13px;
+  }
+}</style>
 </head>
 
 <body>
+  <nav class="nav">
+  <a href="home.html">🏠 Home</a>
+  <a href="index.html#duas">🤲 Duas</a>
+  <a href="names.html">🕋 Allah's Names</a>
+  <a href="quran.html">📖 Qur'an</a>
+  <a href="favorites.html">⭐ Favorites</a>
+  </nav>
 
 <header>
   <div class="wrap">
