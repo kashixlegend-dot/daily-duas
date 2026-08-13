@@ -551,7 +551,7 @@ async function loadSurah(number){
 
   try{
 const response =
-  await fetch(`${API}/${number}`);
+  await fetch("./quran-uthmani.txt");
 
     if(!response.ok){
       throw new Error("Could not load the Qur'an.");
