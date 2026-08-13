@@ -7,6 +7,13 @@
 <title>Qur'an — Daily Duas</title>
 
 <style>
+
+11  @font-face{
+12    font-family:"IndoPak";
+13    src:url("https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2") format("woff2");
+14    font-display:swap;
+15  }
+
 :root{
   --bg:#f5f2e9;
   --card:#fffdf8;
@@ -358,7 +365,7 @@ button.secondary{
 
 <script>
 
-const API = "https://api.quranpedia.net/v1";
+
 
 /*
   Quranpedia Mushaf ID 3 =
@@ -545,7 +552,7 @@ async function loadSurah(number){
   try{
 
     const response =
-      await fetch(`${API}/mushafs/${MUSHAF_ID}/${number}`);
+      await fetch(`${API}${number}`);
 
     if(!response.ok){
       throw new Error("Could not load the Qur'an.");
@@ -553,7 +560,7 @@ async function loadSurah(number){
 
     const data = await response.json();
 
-    currentAyahs = Array.isArray(data) ? data : data.ayahs || [];
+    currentAyahs = Array.isArray(data) ? data : [];
 
     const names = surahs[number-1];
 
@@ -570,13 +577,13 @@ async function loadSurah(number){
     quranPage.innerHTML =
       currentAyahs.map(ayah => {
 
-        const text = ayah.text || "";
+        const text = ayah.text_indopak || "";
 
         return `
           <span class="ayah">
             ${text}
             <span class="ayah-number">
-              ${ayah.number}
+              ${ayah.verse_key.split(":")[1]}
             </span>
           </span>
         `;
