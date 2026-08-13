@@ -601,6 +601,7 @@ async function loadSurah(number){
     });
 
   }catch(error){
+    console.error(error);
 
     status.hidden = false;
     reader.hidden = true;
