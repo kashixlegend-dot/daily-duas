@@ -560,7 +560,7 @@ async function loadSurah(number){
 
     const data = await response.json();
 
-    currentAyahs currentAyahs = Array.isArray(data) ? data : [];
+    currentAyahs = Array.isArray(data) ? data : (data.verses || []);
 
     const names = surahs[number-1];
 
