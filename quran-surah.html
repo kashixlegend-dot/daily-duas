@@ -30,7 +30,27 @@ const currentSurah=Math.max(1,Math.min(114,Number(new URLSearchParams(location.s
 const status=document.getElementById('status'),content=document.getElementById('content'),ayahsEl=document.getElementById('ayahs'),englishName=document.getElementById('englishName'),arabicName=document.getElementById('arabicName'),selectorName=document.getElementById('selectorName'),bismillah=document.getElementById('bismillah'),sheet=document.getElementById('sheet'),options=document.getElementById('options'),sheetSearch=document.getElementById('sheetSearch');
 function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function parse(text){const out=[];for(const raw of text.replace(/^\uFEFF/,'').split(/\r?\n/)){const p=raw.trim().split('|');if(p.length<3)continue;const s=Number(p[0]),a=Number(p[1]),t=p.slice(2).join('|').trim();if(Number.isInteger(s)&&Number.isInteger(a)&&t)out.push({surah:s,ayah:a,arabic:t})}return out}
-function stripLeadingBismillah(t){return t.replace(/^\s*بِسْمِ\s+(?:ٱللَّهِ|اللَّهِ|اللّٰهِ|اللّٰه)\s+(?:الرَّحْمَٰنِ|الرَّحْمَنِ|الرَّحْمٰنِ)\s+(?:الرَّحِيمِ|الرَّحِيْمِ)\s*/,'').trim()}
+function stripLeadingBismillah(t){
+  // IndoPak text can use different Arabic diacritics/Unicode forms.
+  // Remove a leading Bismillah whenever Ayah 1 contains one.
+  const clean=s=>s.normalize('NFKC')
+    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'')
+    .replace(/[ٱأإآ]/g,'ا')
+    .replace(/ـ/g,'');
+  const c=clean(t);
+  if(!/^\s*بسم\s+الله/.test(c)) return t.trim();
+  const end=c.search(/الرحيم/);
+  if(end<0 || end>180) return t.trim();
+  let cut=end+'الرحيم'.length;
+  // Map the normalized-character cut back to the original string.
+  let normalizedCount=0, originalEnd=0;
+  for(let i=0;i<t.length;i++){
+    const one=clean(t[i]);
+    normalizedCount+=one.length;
+    if(normalizedCount>=cut){ originalEnd=i+1; break; }
+  }
+  return t.slice(originalEnd).trim();
+}
 function renderOptions(filter=''){const q=filter.trim().toLowerCase();const items=surahs.map((en,i)=>({n:i+1,en})).filter(s=>!q||String(s.n)===q||s.en.toLowerCase().includes(q));options.innerHTML=items.map(s=>`<a class="option" href="quran-surah.html?surah=${s.n}"><span class="num">${s.n}</span><span><strong>${esc(s.en)}</strong></span></a>`).join('')}
 function openSheet(){sheet.classList.add('open');sheetSearch.value='';renderOptions();setTimeout(()=>sheetSearch.focus(),50)}
 document.getElementById('openSelector').onclick=openSheet;document.getElementById('closeSelector').onclick=()=>sheet.classList.remove('open');sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.classList.remove('open')});sheetSearch.addEventListener('input',()=>renderOptions(sheetSearch.value));
