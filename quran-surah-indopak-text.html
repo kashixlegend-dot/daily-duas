@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173f35">
+<title>Al Quran — Daily Duas</title>
+<style>
+@font-face{
+  font-family:"IndoPak";
+  src:url("https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2") format("woff2"),
+      url("https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff") format("woff");
+  font-display:swap;
+}
+:root{
+ --bg:#f5f2e9;--card:#fffdf8;--ink:#172f29;--muted:#70756f;
+ --green:#176b4d;--dark:#173f35;--gold:#d5c7a0;--line:#ded8c9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.wrap{width:min(900px,94%);margin:auto}
+.top{padding:20px 0 10px;display:flex;align-items:center;justify-content:space-between}
+.top a{color:var(--ink);text-decoration:none;font-size:31px;line-height:1}
+.title{font-size:21px;font-weight:800}
+.icon{font-size:27px}
+.selector-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin:8px 0 14px}
+.selector,.juz{
+ min-height:56px;border:1px solid var(--line);background:var(--card);
+ border-radius:28px;padding:0 18px;display:flex;align-items:center;
+ font-size:17px;font-weight:700;color:var(--ink)
+}
+.selector{justify-content:space-between;cursor:pointer;width:100%}
+.juz{white-space:nowrap;background:#efe7d4}
+.reader{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.head{text-align:center;padding:20px 18px 16px;border-bottom:1px solid var(--line)}
+.head h1{font-size:24px;margin:0 0 7px}
+.head .ar{font-family:serif;font-size:30px;font-weight:700;direction:rtl}
+.bismillah{
+ font-family:"IndoPak",serif;direction:rtl;text-align:center;
+ font-size:38px;line-height:2.1;padding:14px 12px 8px;
+ color:#111;border-bottom:1px solid var(--line)
+}
+.ayah{
+ position:relative;padding:22px 18px 18px;border-bottom:1px solid var(--line);
+ background:var(--card)
+}
+.ayah:last-child{border-bottom:0}
+.ayah-text{
+ font-family:"IndoPak","Noto Nastaliq Urdu",serif;
+ direction:rtl;text-align:right;font-size:34px;line-height:2.15;
+ font-weight:400;color:#111;word-break:normal
+}
+.ayah-meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px;direction:ltr}
+.badge{
+ width:34px;height:34px;border:1px solid var(--gold);border-radius:50%;
+ display:grid;place-items:center;color:var(--green);font-weight:700;font-size:12px
+}
+.actions{display:flex;gap:8px}
+.action{
+ border:1px solid var(--line);background:#efe7d4;border-radius:18px;
+ padding:7px 10px;color:var(--ink);font-size:12px;cursor:pointer
+}
+.loading,.error{padding:35px 20px;text-align:center;color:var(--muted)}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:18px 0 25px}
+.sheet{position:fixed;inset:0;background:#0005;display:none;align-items:flex-end;z-index:20}
+.sheet.open{display:flex}
+.sheet-card{width:100%;max-height:84vh;background:var(--card);border-radius:28px 28px 0 0;padding:17px;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:center}
+.close{border:0;background:none;font-size:28px;cursor:pointer}
+.search{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:12px 0}
+.search input{border:0;outline:0;background:none;width:100%;font-size:16px}
+.option{
+ display:flex;align-items:center;gap:13px;padding:12px;
+ border-bottom:1px solid var(--line);text-decoration:none;color:inherit
+}
+.num{
+ width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;
+ display:grid;place-items:center;flex:none
+}
+.option strong{color:var(--green);font-size:16px}
+.option small{display:block;color:var(--muted);margin-top:3px}
+@media(max-width:600px){
+ .selector,.juz{font-size:16px;padding:0 15px}
+ .head h1{font-size:21px}
+ .ayah{padding:18px 13px 14px}
+ .ayah-text{font-size:30px;line-height:2.12}
+ .bismillah{font-size:33px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+ <a href="quran.html" aria-label="Back">←</a>
+ <div class="title">Al Quran</div>
+ <div class="icon">⌕</div>
+</header>
+
+<div class="selector-row">
+ <button id="selector" class="selector" type="button">
+  <span id="selectedName">Al-Fatihah</span><span>⌄</span>
+ </button>
+ <div class="juz" id="juzLabel">Juz 1</div>
+</div>
+
+<section class="reader">
+ <header class="head">
+  <h1 id="surahTitle">Surah 1 · Al-Fatihah</h1>
+  <div class="ar" id="arabicName">سورة الفاتحة</div>
+ </header>
+ <div id="bismillah" class="bismillah" hidden>بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ</div>
+ <div id="content" class="loading">Loading Qur'an…</div>
+</section>
+
+<div class="footer">
+ IndoPak Nastaleeq · Authentic Quran text source · Daily Duas
+</div>
+</main>
+
+<div id="sheet" class="sheet">
+ <div class="sheet-card">
+  <div class="sheet-head">
+   <strong>Select Surah</strong>
+   <button id="close" class="close" type="button">×</button>
+  </div>
+  <div class="search">
+   <span>⌕</span>
+   <input id="search" placeholder="Search Surah by name or number…" autocomplete="off">
+  </div>
+  <div id="options"></div>
+ </div>
+</div>
+
+<script>
+const API="https://api.islamic.app/v1";
+const FONT_BISMILLAH="بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ";
+let chapters=[];
+let current=Number(new URLSearchParams(location.search).get("surah")||1);
+if(current<1||current>114) current=1;
+
+const $=id=>document.getElementById(id);
+
+function escapeHtml(v){
+ return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+async function getJSON(url){
+ const r=await fetch(url);
+ if(!r.ok) throw new Error("Request failed: "+r.status);
+ return r.json();
+}
+
+async function loadChapters(){
+ const json=await getJSON(`${API}/chapters`);
+ chapters=json.data?.chapters||json.chapters||[];
+ renderOptions();
+}
+
+function renderOptions(query=""){
+ const q=query.trim().toLowerCase();
+ $("options").innerHTML=chapters
+  .filter(c=>!q || String(c.id)===q || (c.name_simple||c.name||"").toLowerCase().includes(q))
+  .map(c=>{
+   const name=c.name_simple||c.name||`Surah ${c.id}`;
+   const ar=c.name_arabic||"";
+   return `<a class="option" href="?surah=${c.id}">
+    <span class="num">${c.id}</span>
+    <span><strong>${escapeHtml(name)}</strong><small>${escapeHtml(ar)}</small></span>
+   </a>`;
+  }).join("");
+}
+
+function cleanBismillah(text){
+ const patterns=[
+  /^بِسۡمِ\s+اللهِ\s+الرَّحۡمٰنِ\s+الرَّحِيۡمِ\s*/u,
+  /^بِسْمِ\s+اللَّهِ\s+الرَّحْمَٰنِ\s+الرَّحِيمِ\s*/u,
+  /^بِسْمِ\s+اللهِ\s+الرَّحْمٰنِ\s+الرَّحِيمِ\s*/u
+ ];
+ let out=text||"";
+ for(const p of patterns) out=out.replace(p,"");
+ return out.trim();
+}
+
+async function loadSurah(){
+ $("content").className="loading";
+ $("content").textContent="Loading Qur'an…";
+ try{
+  const chapter=chapters.find(c=>Number(c.id)===current);
+  const name=chapter?.name_simple||chapter?.name||`Surah ${current}`;
+  const arabic=chapter?.name_arabic||"";
+  $("selectedName").textContent=name;
+  $("surahTitle").textContent=`Surah ${current} · ${name}`;
+  $("arabicName").textContent=arabic ? `سورة ${arabic}` : "";
+  $("juzLabel").textContent=chapter?.juz_number ? `Juz ${chapter.juz_number}` : "Qur'an";
+
+  const json=await getJSON(`${API}/verses/by_chapter/${current}?fields=text_indopak`);
+  const verses=json.data?.verses||json.verses||[];
+  const hasBismillah=chapter?.bismillah_pre!==false && current!==9;
+  $("bismillah").hidden=!hasBismillah;
+
+  $("content").className="";
+  $("content").innerHTML=verses.map(v=>{
+   let text=v.text_indopak||"";
+   if(hasBismillah && Number(v.verse_number||0)===1) text=cleanBismillah(text);
+   return `<article class="ayah">
+    <div class="ayah-text">${escapeHtml(text)}</div>
+    <div class="ayah-meta">
+      <span class="badge">${escapeHtml(v.verse_number??"")}</span>
+      <div class="actions">
+       <button class="action" type="button" data-copy="${escapeHtml(text)}">Copy</button>
+      </div>
+    </div>
+   </article>`;
+  }).join("");
+
+  document.querySelectorAll("[data-copy]").forEach(btn=>{
+   btn.onclick=async()=>{
+    try{
+     await navigator.clipboard.writeText(btn.dataset.copy);
+     btn.textContent="Copied";
+     setTimeout(()=>btn.textContent="Copy",1000);
+    }catch{}
+   };
+  });
+ }catch(e){
+  console.error(e);
+  $("content").className="error";
+  $("content").textContent="The Qur'an could not be loaded right now. Please refresh and try again.";
+ }
+}
+
+$("selector").onclick=()=>{
+ $("sheet").classList.add("open");
+ $("search").value="";
+ renderOptions();
+ $("search").focus();
+};
+$("close").onclick=()=>$("sheet").classList.remove("open");
+$("sheet").addEventListener("click",e=>{
+ if(e.target===$("sheet")) $("sheet").classList.remove("open");
+});
+$("search").addEventListener("input",()=>renderOptions($("search").value));
+
+(async()=>{
+ try{
+  await loadChapters();
+  await loadSurah();
+ }catch(e){
+  console.error(e);
+  $("content").className="error";
+  $("content").textContent="Unable to load the Quran data. Please refresh the page.";
+ }
+})();
+</script>
+</body>
+</html>
