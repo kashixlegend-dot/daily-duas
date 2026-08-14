@@ -1,73 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#173f35">
-<title>Surah — Daily Duas</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Al Quran — Daily Duas</title>
 <style>
-@font-face{font-family:'IndoPak';src:url('https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2') format('woff2'),url('https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff') format('woff');font-display:swap}
-:root{--bg:#f7f3e8;--card:#fffdf8;--ink:#111;--green:#176b4d;--gold:#b7a06a;--line:#ded8c9;--muted:#6d746f}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px 10px;background:#173f35}.nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:999px;background:#2f765f;font-weight:700;font-size:14px}
-.wrap{width:min(900px,94%);margin:auto}.reader-top{padding:18px 0 10px;display:flex;align-items:center;justify-content:space-between}.reader-top a{color:var(--ink);text-decoration:none;font-size:31px}.icons{display:flex;gap:20px;font-size:28px}
-.selector-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:8px 0 14px}.selector button,.juz{height:58px;border:0;background:#efe7d4;border-radius:30px;padding:0 20px;font-size:19px;color:#111;font-weight:600}.selector button{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center}.juz{display:flex;align-items:center;white-space:nowrap}
-.sheet{position:fixed;inset:0;background:rgba(0,0,0,.28);display:none;align-items:flex-end;z-index:10}.sheet.open{display:flex}.sheet-card{background:#fffdf8;width:100%;max-height:82vh;border-radius:28px 28px 0 0;padding:18px;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.close{border:0;background:transparent;font-size:28px}.sheet-search{display:flex;gap:10px;align-items:center;border:1px solid #d5cfbf;border-radius:18px;padding:12px 14px;margin-bottom:12px}.sheet-search input{border:0;outline:0;background:transparent;font-size:16px;width:100%}.options{display:grid;gap:5px}.option{display:flex;align-items:center;gap:14px;padding:13px;border-radius:15px;text-decoration:none;color:#111}.option .num{width:40px;height:40px;border:1.5px solid #d5c7a0;border-radius:50%;display:grid;place-items:center}.option strong{color:var(--green)}
-.reader{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}.surah-head{padding:20px 18px 12px;text-align:center;border-bottom:1px solid var(--line)}.english-name{font-size:20px;font-weight:700}.arabic-name,.bismillah,.arabic{font-family:'IndoPak',serif;direction:rtl}.arabic-name{font-size:34px;font-weight:700;margin-top:5px}.bismillah{text-align:center;font-size:28px;line-height:1.7;padding:22px 10px 8px;white-space:nowrap}.ayah{padding:24px 18px 18px;border-bottom:1px solid var(--line)}.arabic{text-align:right;font-size:36px;line-height:2.25;word-break:normal;overflow-wrap:normal;white-space:normal}.num{display:inline-flex;align-items:center;justify-content:center;width:1.55em;height:1.55em;margin:0 .15em;border:1.5px solid var(--gold);border-radius:50%;font:600 .45em Arial,sans-serif;color:#9c8140;vertical-align:middle;direction:ltr}.tools{display:flex;gap:14px;margin-top:16px}.tool{width:54px;height:54px;border:1px solid #d1cab9;border-radius:50%;background:transparent;color:var(--green);font-size:23px}.status{padding:28px;text-align:center;color:var(--muted)}.error{color:#9a3d32}
+:root{--bg:#f5f2e9;--card:#fffdf8;--ink:#172f29;--muted:#6d746f;--green:#176b4d;--dark:#173f35;--gold:#b7a06a;--line:#ded8c9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif}.wrap{width:min(900px,94%);margin:auto}
+.top{padding:22px 0 10px;display:flex;align-items:center;justify-content:space-between}.top a{color:var(--ink);text-decoration:none;font-size:31px}.title{font-weight:800;font-size:21px}.icon{font-size:27px}
+.selector-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin:8px 0 14px}.selector,.juz{height:58px;border:0;background:#efe7d4;border-radius:30px;padding:0 20px;display:flex;align-items:center;font-size:18px;font-weight:700}.selector{justify-content:space-between;cursor:pointer}.juz{white-space:nowrap}
+.reader{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}.head{text-align:center;padding:20px 18px 15px;border-bottom:1px solid var(--line)}.head h1{font-size:24px;margin:0 0 7px}.head .ar{font-family:serif;font-size:30px;font-weight:700;direction:rtl}
+.page-shell{padding:14px;background:#eee8db}.page-card{background:white;border-radius:18px;box-shadow:0 3px 16px #0001;padding:8px;overflow:hidden}.page-card canvas{display:block;width:100%;height:auto}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;background:var(--card);border-top:1px solid var(--line)}.ctrl{border:1px solid var(--line);background:#efe7d4;border-radius:18px;padding:11px 16px;font-weight:700;color:var(--ink)}.page-no{color:var(--muted);font-size:14px}
+.status{padding:28px;text-align:center;color:var(--muted)}.footer{text-align:center;color:var(--muted);font-size:13px;padding:18px}
+.sheet{position:fixed;inset:0;background:#0005;display:none;align-items:flex-end;z-index:10}.sheet.open{display:flex}.sheet-card{width:100%;max-height:84vh;background:var(--card);border-radius:28px 28px 0 0;padding:17px;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:none;font-size:28px}.search{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:12px 0}.search input{border:0;outline:0;background:none;width:100%;font-size:16px}.option{display:flex;align-items:center;gap:13px;padding:12px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}.option .num{width:40px;height:40px;border:2px solid #d5c7a0;border-radius:50%;display:grid;place-items:center}.option strong{color:var(--green)}
+@media(max-width:600px){.selector,.juz{font-size:16px;padding:0 15px}.page-shell{padding:8px}.head h1{font-size:21px}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
 </head>
 <body>
-<nav class="nav"><a href="index.html">🏠 Home</a><a href="duas.html">🤲 Duas</a><a href="names.html">🕋 Allah's Names</a><a href="quran.html">📖 Qur'an</a><a href="favorites.html">⭐ Favorites</a></nav>
 <main class="wrap">
-<div class="reader-top"><a href="quran.html">←</a><strong>Al Quran</strong><div class="icons"><span>⌕</span><span>⚙</span></div></div>
-<div class="selector-row"><div class="selector"><button id="openSelector" type="button"><span id="selectorName">Al-Faatiha</span><span>⌄</span></button></div><div class="juz">Juz 1</div></div>
-<section class="reader"><div id="status" class="status">Loading Qur'an…</div><div id="content" hidden><header class="surah-head"><div id="englishName" class="english-name"></div><div id="arabicName" class="arabic-name"></div></header><div id="bismillah" class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ</div><div id="ayahs"></div></div></section>
-</main>
-<div id="sheet" class="sheet"><div class="sheet-card"><div class="sheet-head"><strong>Select Surah</strong><button class="close" id="closeSelector">×</button></div><div class="sheet-search"><span>⌕</span><input id="sheetSearch" placeholder="Search Surah name or number…" autocomplete="off"></div><div id="options" class="options"></div></div></div>
-<script>
-const surahs=['Al-Faatiha','Al-Baqarah','Aal-i-Imraan','An-Nisaa','Al-Maaida',"Al-An'aam","Al-A'raaf",'Al-Anfaal','At-Tawba','Yunus','Hud','Yusuf',"Ar-Ra'd",'Ibraaheem','Al-Hijr','An-Nahl','Al-Israa','Al-Kahf','Maryam','Taa-Haa','Al-Anbiyaa','Al-Hajj',"Al-Mu'minoon",'An-Noor','Al-Furqaan',"Ash-Shu'araa",'An-Naml','Al-Qasas','Al-Ankaboot','Ar-Room','Luqmaan','As-Sajda','Al-Ahzaab','Saba','Faatir','Yaseen','As-Saaffaat','Saad','Az-Zumar','Ghaafir','Fussilat','Ash-Shura','Az-Zukhruf','Ad-Dukhaan','Al-Jaathiya','Al-Ahqaaf','Muhammad','Al-Fath','Al-Hujuraat','Qaaf','Adh-Dhaariyat','At-Tur','An-Najm','Al-Qamar','Ar-Rahmaan','Al-Waaqia','Al-Hadid','Al-Mujaadila','Al-Hashr','Al-Mumtahana','As-Saff',"Al-Jumu'a",'Al-Munaafiqoon','At-Taghaabun','At-Talaaq','At-Tahrim','Al-Mulk','Al-Qalam','Al-Haaqqa',"Al-Ma'aarij",'Nooh','Al-Jinn','Al-Muzzammil','Al-Muddaththir','Al-Qiyaama','Al-Insaan','Al-Mursalaat','An-Naba',"An-Naazi'aat",'Abasa','At-Takwir','Al-Infitaar','Al-Mutaffifin','Al-Inshiqaaq','Al-Burooj','At-Taariq',"Al-A'laa",'Al-Ghaashiya','Al-Fajr','Al-Balad','Ash-Shams','Al-Lail','Ad-Dhuhaa','Ash-Sharh','At-Tin','Al-Alaq','Al-Qadr','Al-Bayyina','Az-Zalzala','Al-Aadiyaat',"Al-Qaari'a",'At-Takaathur','Al-Asr','Al-Humaza','Al-Fil','Quraish',"Al-Maa'oon",'Al-Kawthar','Al-Kaafiroon','An-Nasr','Al-Masad','Al-Ikhlaas','Al-Falaq','An-Naas'];
-const currentSurah=Math.max(1,Math.min(114,Number(new URLSearchParams(location.search).get('surah'))||1)),QURAN_FILE='./quran-uthmani.txt';
-const status=document.getElementById('status'),content=document.getElementById('content'),ayahsEl=document.getElementById('ayahs'),englishName=document.getElementById('englishName'),arabicName=document.getElementById('arabicName'),selectorName=document.getElementById('selectorName'),bismillah=document.getElementById('bismillah'),sheet=document.getElementById('sheet'),options=document.getElementById('options'),sheetSearch=document.getElementById('sheetSearch');
-function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function cleanQuranText(t){
-  return String(t)
-    .replace(/[\\u06D6-\\u06ED]/g,'')   // remove waqf/pause marks
-    .replace(/\\u06DD/g,'');              // Arabic end-of-ayah symbol if present
+<header class="top"><a href="quran.html">←</a><div class="title">Al Quran</div><div class="icon">⌕</div></header>
+<div class="selector-row"><button class="selector" id="selector"><span id="name">Al-Faatiha</span><span>⌄</span></button><div class="juz" id="juz">Juz 1</div></div>
+<section class="reader"><header class="head"><h1 id="title">Surah 1 · Al-Faatiha</h1><div class="ar" id="ar">سورة الفاتحة</div></header>
+<div id="status" class="status">Loading IndoPak page…</div><div class="page-shell" id="shell" hidden><div class="page-card"><canvas id="page"></canvas></div></div>
+<div class="controls" id="controls" hidden><button class="ctrl" id="prev">← Previous</button><span class="page-no" id="pageNo"></span><button class="ctrl" id="next">Next →</button></div></section>
+<div class="footer">Authentic IndoPak page rendering · Daily Duas</div></main>
+<div class="sheet" id="sheet"><div class="sheet-card"><div class="sheet-head"><strong>Select Surah</strong><button class="close" id="close">×</button></div><div class="search">⌕<input id="search" placeholder="Search Surah by name or number…"></div><div id="options"></div></div></div>
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+const surahs=[
+["Al-Faatiha","الفاتحة",1,1],["Al-Baqarah","البقرة",1,2],["Aal-i-Imraan","آل عمران",2,50],["An-Nisaa","النساء",3,77],["Al-Maaida","المائدة",4,106],["Al-An'aam","الأنعام",5,128],["Al-A'raaf","الأعراف",6,151],["Al-Anfaal","الأنفال",7,177],["At-Tawba","التوبة",7,187],["Yunus","يونس",8,208],["Hud","هود",8,221],["Yusuf","يوسف",9,235],["Ar-Ra'd","الرعد",9,249],["Ibraaheem","إبراهيم",10,255],["Al-Hijr","الحجر",10,262],["An-Nahl","النحل",10,267]
+];
+const params=new URLSearchParams(location.search);let current=Math.max(1,Math.min(16,Number(params.get("surah")||1))), page;
+const $=id=>document.getElementById(id);
+function data(){return surahs[current-1]}
+function renderOptions(q=""){let v=q.toLowerCase().trim();$("options").innerHTML=surahs.map((s,i)=>[s,i+1]).filter(([s,n])=>!v||String(n)==v||s[0].toLowerCase().includes(v)).map(([s,n])=>`<a class="option" href="?surah=${n}"><span class="num">${n}</span><span><strong>${s[0]}</strong><small>${s[1]} · Juz ${s[2]}</small></span></a>`).join("")}
+async function render(){
+ let [en,ar,juz,global]=data();$("name").textContent=en;$("title").textContent=`Surah ${current} · ${en}`;$("ar").textContent=`سورة ${ar}`;$("juz").textContent=`Juz ${juz}`;
+ let local=global-(juz-1)*20; if(local<1)local=1;
+ const src=`juz${String(juz).padStart(2,"0")}.pdf`;
+ try{
+  const pdf=await pdfjsLib.getDocument(src).promise;
+  page=Math.min(local+1,pdf.numPages); // supplied Juz PDFs include a front page
+  await draw(pdf,page);
+ }catch(e){$("status").textContent="Could not load this Juz PDF. Make sure juz01.pdf–juz10.pdf are in the same folder as this file."}
 }
-function parse(text){const out=[];for(const raw of text.replace(/^\uFEFF/,'').split(/\r?\n/)){const p=raw.trim().split('|');if(p.length<3)continue;const s=Number(p[0]),a=Number(p[1]),t=p.slice(2).join('|').trim();if(Number.isInteger(s)&&Number.isInteger(a)&&t)out.push({surah:s,ayah:a,arabic:t})}return out}
-function stripLeadingBismillah(t){
-  const original=String(t).trim();
-  const normalize=s=>String(s).normalize('NFKC')
-    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'')
-    .replace(/ـ/g,'')
-    .replace(/[ٱأإآ]/g,'ا')
-    .replace(/\s+/g,'');
-  const n=normalize(original);
-  const target='بسماللهالرحمنالرحيم';
-  if(!n.startsWith(target)) return original;
-
-  // Find the end of the Bismillah in the original string by walking
-  // characters while comparing their normalized form.
-  let normPos=0, end=-1;
-  for(let i=0;i<original.length;i++){
-    const piece=normalize(original[i]);
-    if(piece) normPos+=piece.length;
-    if(normPos>=target.length){ end=i+1; break; }
-  }
-  if(end<0) return original;
-  return original.slice(end).trim();
-}
-function renderOptions(filter=''){const q=filter.trim().toLowerCase();const items=surahs.map((en,i)=>({n:i+1,en})).filter(s=>!q||String(s.n)===q||s.en.toLowerCase().includes(q));options.innerHTML=items.map(s=>`<a class="option" href="quran-surah.html?surah=${s.n}"><span class="num">${s.n}</span><span><strong>${esc(s.en)}</strong></span></a>`).join('')}
-function openSheet(){sheet.classList.add('open');sheetSearch.value='';renderOptions();setTimeout(()=>sheetSearch.focus(),50)}
-document.getElementById('openSelector').onclick=openSheet;document.getElementById('closeSelector').onclick=()=>sheet.classList.remove('open');sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.classList.remove('open')});sheetSearch.addEventListener('input',()=>renderOptions(sheetSearch.value));
-async function load(){try{const r=await fetch(QURAN_FILE+'?v=indopak2',{cache:'no-store'});if(!r.ok)throw Error('Could not load the Qur’an text file.');const all=parse(await r.text()),verses=all.filter(a=>a.surah===currentSurah);if(!verses.length)throw Error('No verses found for this Surah.');const name=surahs[currentSurah-1];selectorName.textContent=name;englishName.textContent=`Surah ${currentSurah} · ${name}`;arabicName.textContent=`سورة ${currentSurah}`;bismillah.style.display=currentSurah===9?'none':'block';ayahsEl.innerHTML=verses.map(v=>{
-  let text=cleanQuranText(v.arabic);
-  if(v.ayah===1&&currentSurah!==9) text=stripLeadingBismillah(text);
-  text=cleanQuranText(text);
-  if(!text)return '';
-  return `<article class="ayah"><div class="arabic">${esc(text)} <span class="num">${v.ayah}</span></div><div class="tools"><button class="tool" title="Play">▶</button><button class="tool" title="Bookmark">♡</button></div></article>`;
-}).join('');status.hidden=true;content.hidden=false}catch(e){status.className='status error';status.textContent=e.message}}
-load();
-</script>
-</body>
-</html>
+async function draw(pdf,n){let p=await pdf.getPage(n),v=p.getViewport({scale:1.5}),c=$("page"),ctx=c.getContext("2d");c.width=v.width;c.height=v.height;await p.render({canvasContext:ctx,viewport:v}).promise;$("status").hidden=true;$("shell").hidden=false;$("controls").hidden=false;$("pageNo").textContent=`Page ${n} of ${pdf.numPages}`}
+$("prev").onclick=async()=>{if(page>1){let [en,ar,juz,global]=data();let pdf=await pdfjsLib.getDocument(`juz${String(juz).padStart(2,"0")}.pdf`).promise;page--;await draw(pdf,page)}};$("next").onclick=async()=>{let [en,ar,juz,global]=data();let pdf=await pdfjsLib.getDocument(`juz${String(juz).padStart(2,"0")}.pdf`).promise;if(page<pdf.numPages){page++;await draw(pdf,page)}};
+$("selector").onclick=()=>{$("sheet").classList.add("open");renderOptions();$("search").value=""};$("close").onclick=()=>$("sheet").classList.remove("open");$("search").oninput=e=>renderOptions(e.target.value);renderOptions();render();
+</script></body></html>
