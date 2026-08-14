@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Al Quran — Daily Duas</title>
+<style>
+:root{--bg:#f5f2e9;--card:#fffdf8;--ink:#172f29;--muted:#6d746f;--green:#176b4d;--dark:#173f35;--gold:#b7a06a;--line:#ded8c9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif}.wrap{width:min(900px,94%);margin:auto}
+.top{padding:22px 0 10px;display:flex;align-items:center;justify-content:space-between}.top a{color:var(--ink);text-decoration:none;font-size:31px}.title{font-weight:800;font-size:21px}.icon{font-size:27px}
+.selector-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin:8px 0 14px}.selector,.juz{height:58px;border:0;background:#efe7d4;border-radius:30px;padding:0 20px;display:flex;align-items:center;font-size:18px;font-weight:700}.selector{justify-content:space-between;cursor:pointer}.juz{white-space:nowrap}
+.reader{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}.head{text-align:center;padding:20px 18px 15px;border-bottom:1px solid var(--line)}.head h1{font-size:24px;margin:0 0 7px}.head .ar{font-family:serif;font-size:30px;font-weight:700;direction:rtl}
+.page-shell{padding:14px;background:#eee8db}.page-card{background:white;border-radius:18px;box-shadow:0 3px 16px #0001;padding:8px;overflow:hidden}.page-card canvas{display:block;width:100%;height:auto}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;background:var(--card);border-top:1px solid var(--line)}.ctrl{border:1px solid var(--line);background:#efe7d4;border-radius:18px;padding:11px 16px;font-weight:700;color:var(--ink)}.page-no{color:var(--muted);font-size:14px}
+.status{padding:28px;text-align:center;color:var(--muted)}.footer{text-align:center;color:var(--muted);font-size:13px;padding:18px}
+.sheet{position:fixed;inset:0;background:#0005;display:none;align-items:flex-end;z-index:10}.sheet.open{display:flex}.sheet-card{width:100%;max-height:84vh;background:var(--card);border-radius:28px 28px 0 0;padding:17px;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:none;font-size:28px}.search{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:12px 0}.search input{border:0;outline:0;background:none;width:100%;font-size:16px}.option{display:flex;align-items:center;gap:13px;padding:12px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}.option .num{width:40px;height:40px;border:2px solid #d5c7a0;border-radius:50%;display:grid;place-items:center}.option strong{color:var(--green)}
+@media(max-width:600px){.selector,.juz{font-size:16px;padding:0 15px}.page-shell{padding:8px}.head h1{font-size:21px}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><a href="quran.html">←</a><div class="title">Al Quran</div><div class="icon">⌕</div></header>
+<div class="selector-row"><button class="selector" id="selector"><span id="name">Al-Faatiha</span><span>⌄</span></button><div class="juz" id="juz">Juz 1</div></div>
+<section class="reader"><header class="head"><h1 id="title">Surah 1 · Al-Faatiha</h1><div class="ar" id="ar">سورة الفاتحة</div></header>
+<div id="status" class="status">Loading IndoPak page…</div><div class="page-shell" id="shell" hidden><div class="page-card"><canvas id="page"></canvas></div></div>
+<div class="controls" id="controls" hidden><button class="ctrl" id="prev">← Previous</button><span class="page-no" id="pageNo"></span><button class="ctrl" id="next">Next →</button></div></section>
+<div class="footer">Authentic IndoPak page rendering · Daily Duas</div></main>
+<div class="sheet" id="sheet"><div class="sheet-card"><div class="sheet-head"><strong>Select Surah</strong><button class="close" id="close">×</button></div><div class="search">⌕<input id="search" placeholder="Search Surah by name or number…"></div><div id="options"></div></div></div>
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+const surahs=[
+["Al-Faatiha","الفاتحة",1,1],["Al-Baqarah","البقرة",1,2],["Aal-i-Imraan","آل عمران",2,50],["An-Nisaa","النساء",3,77],["Al-Maaida","المائدة",4,106],["Al-An'aam","الأنعام",5,128],["Al-A'raaf","الأعراف",6,151],["Al-Anfaal","الأنفال",7,177],["At-Tawba","التوبة",7,187],["Yunus","يونس",8,208],["Hud","هود",8,221],["Yusuf","يوسف",9,235],["Ar-Ra'd","الرعد",9,249],["Ibraaheem","إبراهيم",10,255],["Al-Hijr","الحجر",10,262],["An-Nahl","النحل",10,267]
+];
+const params=new URLSearchParams(location.search);let current=Math.max(1,Math.min(16,Number(params.get("surah")||1))), page;
+const $=id=>document.getElementById(id);
+function data(){return surahs[current-1]}
+function renderOptions(q=""){let v=q.toLowerCase().trim();$("options").innerHTML=surahs.map((s,i)=>[s,i+1]).filter(([s,n])=>!v||String(n)==v||s[0].toLowerCase().includes(v)).map(([s,n])=>`<a class="option" href="?surah=${n}"><span class="num">${n}</span><span><strong>${s[0]}</strong><small>${s[1]} · Juz ${s[2]}</small></span></a>`).join("")}
+async function render(){
+ let [en,ar,juz,global]=data();$("name").textContent=en;$("title").textContent=`Surah ${current} · ${en}`;$("ar").textContent=`سورة ${ar}`;$("juz").textContent=`Juz ${juz}`;
+ let local=global-(juz-1)*20; if(local<1)local=1;
+ const src=`juz${String(juz).padStart(2,"0")}.pdf`;
+ try{
+  const pdf=await pdfjsLib.getDocument(src).promise;
+  page=Math.min(local+1,pdf.numPages); // supplied Juz PDFs include a front page
+  await draw(pdf,page);
+ }catch(e){$("status").textContent="Could not load this Juz PDF. Make sure juz01.pdf–juz10.pdf are in the same folder as this file."}
+}
+async function draw(pdf,n){let p=await pdf.getPage(n),v=p.getViewport({scale:1.5}),c=$("page"),ctx=c.getContext("2d");c.width=v.width;c.height=v.height;await p.render({canvasContext:ctx,viewport:v}).promise;$("status").hidden=true;$("shell").hidden=false;$("controls").hidden=false;$("pageNo").textContent=`Page ${n} of ${pdf.numPages}`}
+$("prev").onclick=async()=>{if(page>1){let [en,ar,juz,global]=data();let pdf=await pdfjsLib.getDocument(`juz${String(juz).padStart(2,"0")}.pdf`).promise;page--;await draw(pdf,page)}};$("next").onclick=async()=>{let [en,ar,juz,global]=data();let pdf=await pdfjsLib.getDocument(`juz${String(juz).padStart(2,"0")}.pdf`).promise;if(page<pdf.numPages){page++;await draw(pdf,page)}};
+$("selector").onclick=()=>{$("sheet").classList.add("open");renderOptions();$("search").value=""};$("close").onclick=()=>$("sheet").classList.remove("open");$("search").oninput=e=>renderOptions(e.target.value);renderOptions();render();
+</script></body></html>
