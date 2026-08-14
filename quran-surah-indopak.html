@@ -2,40 +2,113 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#173f35">
-<title>Surah — Daily Duas</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f2e9">
+<title>Al Quran — IndoPak — Daily Duas</title>
 <style>
-@font-face{font-family:'IndoPak';src:url('https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2') format('woff2'),url('https://verses.quran.foundation/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff') format('woff');font-display:swap}
-:root{--bg:#f7f3e8;--card:#fffdf8;--ink:#111;--green:#176b4d;--gold:#b7a06a;--line:#ded8c9;--muted:#6d746f}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:12px 10px;background:#173f35}.nav a{color:#fff;text-decoration:none;padding:9px 12px;border-radius:999px;background:#2f765f;font-weight:700;font-size:14px}
-.wrap{width:min(900px,94%);margin:auto}.reader-top{padding:18px 0 10px;display:flex;align-items:center;justify-content:space-between}.reader-top a{color:var(--ink);text-decoration:none;font-size:31px}.icons{display:flex;gap:20px;font-size:28px}
-.selector-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin:8px 0 14px}.selector button,.juz{height:58px;border:0;background:#efe7d4;border-radius:30px;padding:0 20px;font-size:19px;color:#111;font-weight:600}.selector button{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center}.juz{display:flex;align-items:center;white-space:nowrap}
-.sheet{position:fixed;inset:0;background:rgba(0,0,0,.28);display:none;align-items:flex-end;z-index:10}.sheet.open{display:flex}.sheet-card{background:#fffdf8;width:100%;max-height:82vh;border-radius:28px 28px 0 0;padding:18px;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.close{border:0;background:transparent;font-size:28px}.sheet-search{display:flex;gap:10px;align-items:center;border:1px solid #d5cfbf;border-radius:18px;padding:12px 14px;margin-bottom:12px}.sheet-search input{border:0;outline:0;background:transparent;font-size:16px;width:100%}.options{display:grid;gap:5px}.option{display:flex;align-items:center;gap:14px;padding:13px;border-radius:15px;text-decoration:none;color:#111}.option .num{width:40px;height:40px;border:1.5px solid #d5c7a0;border-radius:50%;display:grid;place-items:center}.option strong{color:var(--green)}
-.reader{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}.surah-head{padding:20px 18px 12px;text-align:center;border-bottom:1px solid var(--line)}.english-name{font-size:20px;font-weight:700}.arabic-name,.bismillah,.arabic{font-family:'IndoPak',serif;direction:rtl}.arabic-name{font-size:34px;font-weight:700;margin-top:5px}.bismillah{text-align:center;font-size:34px;line-height:2;padding:22px 16px 8px}.ayah{padding:24px 18px 18px;border-bottom:1px solid var(--line)}.arabic{text-align:right;font-size:36px;line-height:2.25;word-break:normal;overflow-wrap:normal;white-space:normal}.num{display:inline-flex;align-items:center;justify-content:center;width:1.55em;height:1.55em;margin:0 .15em;border:1.5px solid var(--gold);border-radius:50%;font:600 .45em Arial,sans-serif;color:#9c8140;vertical-align:middle;direction:ltr}.tools{display:flex;gap:14px;margin-top:16px}.tool{width:54px;height:54px;border:1px solid #d1cab9;border-radius:50%;background:transparent;color:var(--green);font-size:23px}.status{padding:28px;text-align:center;color:var(--muted)}.error{color:#9a3d32}
+:root{--bg:#f5f2e9;--card:#fffdf8;--ink:#111;--green:#176b4d;--gold:#b7a06a;--line:#ded8c9;--muted:#70756f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.wrap{width:min(900px,94%);margin:auto}
+.top{padding:20px 0 12px;display:flex;align-items:center;justify-content:space-between}
+.top a{color:var(--ink);text-decoration:none;font-size:31px}
+.title{font-size:21px;font-weight:800}
+.icon{font-size:28px}
+.selector-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin:8px 0 14px}
+.selector,.juz{height:58px;border:0;background:#efe7d4;border-radius:30px;padding:0 20px;display:flex;align-items:center;font-size:19px;font-weight:700}
+.selector{justify-content:space-between;cursor:pointer}
+.juz{white-space:nowrap}
+.search{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:13px 16px;margin-bottom:14px}
+.search input{border:0;outline:0;background:transparent;width:100%;font-size:17px}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:flex-end;z-index:20}
+.sheet.open{display:flex}
+.sheet-card{width:100%;max-height:82vh;background:var(--card);border-radius:28px 28px 0 0;padding:16px;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.close{border:0;background:transparent;font-size:28px}
+.options{display:grid;gap:4px}
+.option{display:flex;align-items:center;gap:14px;padding:12px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.option .num{width:42px;height:42px;border:2px solid #d5c7a0;border-radius:50%;display:grid;place-items:center;flex:none}
+.option strong{color:var(--green);font-size:17px}
+.option small{display:block;margin-top:3px;color:var(--muted)}
+.reader{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.head{padding:22px 18px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.head h1{font-size:26px;margin:0 0 12px}
+.head .ar{font-family:serif;font-size:30px;font-weight:700;direction:rtl}
+.notice{padding:12px 16px;text-align:center;color:var(--muted);font-size:13px;border-bottom:1px solid var(--line)}
+.pdf-wrap{background:#fff;height:min(78vh,900px)}
+iframe{width:100%;height:100%;border:0;display:block}
+.bottom{padding:14px;text-align:center;color:var(--muted);font-size:13px}
+@media(max-width:600px){.selector,.juz{font-size:17px;padding:0 16px}.head h1{font-size:23px}}
 </style>
 </head>
 <body>
-<nav class="nav"><a href="index.html">🏠 Home</a><a href="duas.html">🤲 Duas</a><a href="names.html">🕋 Allah's Names</a><a href="quran.html">📖 Qur'an</a><a href="favorites.html">⭐ Favorites</a></nav>
 <main class="wrap">
-<div class="reader-top"><a href="quran.html">←</a><strong>Al Quran</strong><div class="icons"><span>⌕</span><span>⚙</span></div></div>
-<div class="selector-row"><div class="selector"><button id="openSelector" type="button"><span id="selectorName">Al-Faatiha</span><span>⌄</span></button></div><div class="juz">Juz 1</div></div>
-<section class="reader"><div id="status" class="status">Loading Qur'an…</div><div id="content" hidden><header class="surah-head"><div id="englishName" class="english-name"></div><div id="arabicName" class="arabic-name"></div></header><div id="bismillah" class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ</div><div id="ayahs"></div></div></section>
+<header class="top">
+  <a href="quran.html" aria-label="Back">←</a>
+  <div class="title">Al Quran</div>
+  <div class="icon">⌕</div>
+</header>
+
+<div class="selector-row">
+  <button id="selector" class="selector" type="button"><span id="selectedName">Al-Faatiha</span><span>⌄</span></button>
+  <div class="juz" id="juzLabel">Juz 1</div>
+</div>
+
+<section class="reader">
+  <header class="head">
+    <h1 id="surahTitle">Surah 1 · Al-Faatiha</h1>
+    <div class="ar" id="arabicName">سورة الفاتحة</div>
+  </header>
+  <div class="notice">IndoPak scan supplied for Daily Duas · original waqf marks are preserved</div>
+  <div class="pdf-wrap">
+    <iframe id="pdf" title="IndoPak Qur'an page"></iframe>
+  </div>
+</section>
+<div class="bottom">The Qur'an pages shown here come directly from the Juz 1–10 PDFs you supplied.</div>
 </main>
-<div id="sheet" class="sheet"><div class="sheet-card"><div class="sheet-head"><strong>Select Surah</strong><button class="close" id="closeSelector">×</button></div><div class="sheet-search"><span>⌕</span><input id="sheetSearch" placeholder="Search Surah name or number…" autocomplete="off"></div><div id="options" class="options"></div></div></div>
+
+<div id="sheet" class="sheet">
+  <div class="sheet-card">
+    <div class="sheet-head"><strong>Select Surah</strong><button id="close" class="close">×</button></div>
+    <div class="search"><span>⌕</span><input id="search" placeholder="Search Surah name or number…" autocomplete="off"></div>
+    <div id="options" class="options"></div>
+  </div>
+</div>
+
 <script>
-const surahs=['Al-Faatiha','Al-Baqarah','Aal-i-Imraan','An-Nisaa','Al-Maaida',"Al-An'aam","Al-A'raaf",'Al-Anfaal','At-Tawba','Yunus','Hud','Yusuf',"Ar-Ra'd",'Ibraaheem','Al-Hijr','An-Nahl','Al-Israa','Al-Kahf','Maryam','Taa-Haa','Al-Anbiyaa','Al-Hajj',"Al-Mu'minoon",'An-Noor','Al-Furqaan',"Ash-Shu'araa",'An-Naml','Al-Qasas','Al-Ankaboot','Ar-Room','Luqmaan','As-Sajda','Al-Ahzaab','Saba','Faatir','Yaseen','As-Saaffaat','Saad','Az-Zumar','Ghaafir','Fussilat','Ash-Shura','Az-Zukhruf','Ad-Dukhaan','Al-Jaathiya','Al-Ahqaaf','Muhammad','Al-Fath','Al-Hujuraat','Qaaf','Adh-Dhaariyat','At-Tur','An-Najm','Al-Qamar','Ar-Rahmaan','Al-Waaqia','Al-Hadid','Al-Mujaadila','Al-Hashr','Al-Mumtahana','As-Saff',"Al-Jumu'a",'Al-Munaafiqoon','At-Taghaabun','At-Talaaq','At-Tahrim','Al-Mulk','Al-Qalam','Al-Haaqqa',"Al-Ma'aarij",'Nooh','Al-Jinn','Al-Muzzammil','Al-Muddaththir','Al-Qiyaama','Al-Insaan','Al-Mursalaat','An-Naba',"An-Naazi'aat",'Abasa','At-Takwir','Al-Infitaar','Al-Mutaffifin','Al-Inshiqaaq','Al-Burooj','At-Taariq',"Al-A'laa",'Al-Ghaashiya','Al-Fajr','Al-Balad','Ash-Shams','Al-Lail','Ad-Dhuhaa','Ash-Sharh','At-Tin','Al-Alaq','Al-Qadr','Al-Bayyina','Az-Zalzala','Al-Aadiyaat',"Al-Qaari'a",'At-Takaathur','Al-Asr','Al-Humaza','Al-Fil','Quraish',"Al-Maa'oon",'Al-Kawthar','Al-Kaafiroon','An-Nasr','Al-Masad','Al-Ikhlaas','Al-Falaq','An-Naas'];
-const currentSurah=Math.max(1,Math.min(114,Number(new URLSearchParams(location.search).get('surah'))||1)),QURAN_FILE='./quran-uthmani.txt';
-const status=document.getElementById('status'),content=document.getElementById('content'),ayahsEl=document.getElementById('ayahs'),englishName=document.getElementById('englishName'),arabicName=document.getElementById('arabicName'),selectorName=document.getElementById('selectorName'),bismillah=document.getElementById('bismillah'),sheet=document.getElementById('sheet'),options=document.getElementById('options'),sheetSearch=document.getElementById('sheetSearch');
-function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function parse(text){const out=[];for(const raw of text.replace(/^\uFEFF/,'').split(/\r?\n/)){const p=raw.trim().split('|');if(p.length<3)continue;const s=Number(p[0]),a=Number(p[1]),t=p.slice(2).join('|').trim();if(Number.isInteger(s)&&Number.isInteger(a)&&t)out.push({surah:s,ayah:a,arabic:t})}return out}
-function stripLeadingBismillah(t){return t.replace(/^\s*بِسْمِ\s+(?:ٱللَّهِ|اللَّهِ|اللّٰهِ|اللّٰه)\s+(?:الرَّحْمَٰنِ|الرَّحْمَنِ|الرَّحْمٰنِ)\s+(?:الرَّحِيمِ|الرَّحِيْمِ)\s*/,'').trim()}
-function renderOptions(filter=''){const q=filter.trim().toLowerCase();const items=surahs.map((en,i)=>({n:i+1,en})).filter(s=>!q||String(s.n)===q||s.en.toLowerCase().includes(q));options.innerHTML=items.map(s=>`<a class="option" href="quran-surah.html?surah=${s.n}"><span class="num">${s.n}</span><span><strong>${esc(s.en)}</strong></span></a>`).join('')}
-function openSheet(){sheet.classList.add('open');sheetSearch.value='';renderOptions();setTimeout(()=>sheetSearch.focus(),50)}
-document.getElementById('openSelector').onclick=openSheet;document.getElementById('closeSelector').onclick=()=>sheet.classList.remove('open');sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.classList.remove('open')});sheetSearch.addEventListener('input',()=>renderOptions(sheetSearch.value));
-async function load(){try{const r=await fetch(QURAN_FILE,{cache:'no-store'});if(!r.ok)throw Error('Could not load the Qur’an text file.');const all=parse(await r.text()),verses=all.filter(a=>a.surah===currentSurah);if(!verses.length)throw Error('No verses found for this Surah.');const name=surahs[currentSurah-1];selectorName.textContent=name;englishName.textContent=`Surah ${currentSurah} · ${name}`;arabicName.textContent=`سورة ${currentSurah}`;bismillah.style.display=currentSurah===9?'none':'block';ayahsEl.innerHTML=verses.map(v=>{let text=v.arabic;if(v.ayah===1&&currentSurah!==9)text=stripLeadingBismillah(text);if(!text)return '';return `<article class="ayah"><div class="arabic">${esc(text)} <span class="num">${v.ayah}</span></div><div class="tools"><button class="tool" title="Play">▶</button><button class="tool" title="Bookmark">♡</button></div></article>`}).join('');status.hidden=true;content.hidden=false}catch(e){status.className='status error';status.textContent=e.message}}
-load();
+const surahs = [{"n": 1, "name": "Al-Faatiha", "ar": "الفاتحة", "juz": 1, "page": 2}, {"n": 2, "name": "Al-Baqarah", "ar": "البقرة", "juz": 1, "page": 2}, {"n": 3, "name": "Aal-i-Imraan", "ar": "آل عمران", "juz": 2, "page": 23}, {"n": 4, "name": "An-Nisaa", "ar": "النساء", "juz": 3, "page": 22}, {"n": 5, "name": "Al-Maaida", "ar": "المائدة", "juz": 4, "page": 24}, {"n": 6, "name": "Al-An'aam", "ar": "الأنعام", "juz": 5, "page": 16}, {"n": 7, "name": "Al-A'raaf", "ar": "الأعراف", "juz": 6, "page": 13}, {"n": 8, "name": "Al-Anfaal", "ar": "الأنفال", "juz": 7, "page": 9}, {"n": 9, "name": "At-Tawba", "ar": "التوبة", "juz": 7, "page": 19}, {"n": 10, "name": "Yunus", "ar": "يونس", "juz": 8, "page": 12}, {"n": 11, "name": "Hud", "ar": "هود", "juz": 8, "page": 26}, {"n": 12, "name": "Yusuf", "ar": "يوسف", "juz": 9, "page": 11}, {"n": 13, "name": "Ar-Ra'd", "ar": "الرعد", "juz": 9, "page": 27}, {"n": 14, "name": "Ibraaheem", "ar": "إبراهيم", "juz": 10, "page": 4}, {"n": 15, "name": "Al-Hijr", "ar": "الحجر", "juz": 10, "page": 12}, {"n": 16, "name": "An-Nahl", "ar": "النحل", "juz": 10, "page": 17}];
+const juzStarts = {1:2,2:29,3:57,4:85,5:113,6:141,7:169,8:197,9:225,10:253};
+const params = new URLSearchParams(location.search);
+let current = Number(params.get("surah") || 1);
+if (!surahs.some(s => s.n === current)) current = 1;
+
+const $ = id => document.getElementById(id);
+function render() {
+  const s = surahs.find(x => x.n === current);
+  $("selectedName").textContent = s.name;
+  $("juzLabel").textContent = "Juz " + s.juz;
+  $("surahTitle").textContent = `Surah ${s.n} · ${s.name}`;
+  $("arabicName").textContent = "سورة " + s.ar;
+  const pdfPage = s.page;
+  $("pdf").src = `quran-pdfs/juz${String(s.juz).padStart(2,"0")}.pdf#page=${pdfPage}`;
+  history.replaceState(null,"",`quran-surah-indopak.html?surah=${s.n}`);
+}
+function renderOptions(q="") {
+  const v=q.trim().toLowerCase();
+  $("options").innerHTML = surahs.filter(s =>
+    !v || String(s.n)===v || s.name.toLowerCase().includes(v)
+  ).map(s => `
+    <a class="option" href="?surah=${s.n}">
+      <span class="num">${s.n}</span>
+      <span><strong>${s.name}</strong><small>${s.ar} · Juz ${s.juz}</small></span>
+    </a>`).join("");
+}
+$("selector").onclick=()=>{ $("sheet").classList.add("open"); $("search").value=""; renderOptions(); };
+$("close").onclick=()=>$("sheet").classList.remove("open");
+$("sheet").addEventListener("click",e=>{if(e.target===$("sheet"))$("sheet").classList.remove("open")});
+$("search").addEventListener("input",()=>renderOptions($("search").value));
+$("options").addEventListener("click",e=>{const a=e.target.closest("a");if(a)$("sheet").classList.remove("open")});
+render();
 </script>
 </body>
 </html>
