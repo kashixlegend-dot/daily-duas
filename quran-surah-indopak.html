@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173f35">
+<title>Al Quran — IndoPak — Daily Duas</title>
+<style>
+:root{
+  --bg:#f5f2e9;--card:#fffdf8;--ink:#172f29;--muted:#70756f;
+  --green:#176b4d;--dark:#173f35;--gold:#d5c7a0;--line:#ded8c9;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.wrap{width:min(920px,94%);margin:auto}
+.top{padding:18px 0 12px;display:flex;align-items:center;justify-content:space-between}
+.top a{color:var(--ink);text-decoration:none;font-size:31px;line-height:1}
+.title{font-size:21px;font-weight:800}
+.icon{font-size:27px}
+.selector-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin:8px 0 14px}
+.selector,.juz{
+  min-height:56px;border:1px solid var(--line);background:var(--card);
+  border-radius:28px;padding:0 18px;display:flex;align-items:center;
+  font-size:17px;font-weight:700;color:var(--ink)
+}
+.selector{justify-content:space-between;cursor:pointer;width:100%}
+.juz{white-space:nowrap;background:#efe7d4}
+.reader{
+  background:var(--card);border:1px solid var(--line);border-radius:28px;
+  overflow:hidden;box-shadow:0 4px 18px rgba(23,63,53,.05)
+}
+.head{text-align:center;padding:18px 16px 14px;border-bottom:1px solid var(--line)}
+.head h1{font-size:23px;margin:0 0 7px}
+.head .ar{font-family:serif;font-size:28px;font-weight:700;direction:rtl}
+.page-area{padding:12px;background:#eee9dc}
+.page-card{
+  background:white;border:1px solid var(--line);border-radius:18px;
+  overflow:hidden;display:flex;justify-content:center;align-items:flex-start;
+  min-height:60vh
+}
+#pdfCanvas{display:block;width:100%;height:auto;background:white}
+.status{padding:34px 20px;text-align:center;color:var(--muted);font-size:15px}
+.controls{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 15px;border-top:1px solid var(--line);background:var(--card)
+}
+.control{
+  border:0;background:#e9decc;color:var(--ink);border-radius:22px;
+  padding:11px 16px;font-weight:700;font-size:14px;cursor:pointer
+}
+.control:disabled{opacity:.45;cursor:default}
+.page-count{font-size:13px;color:var(--muted);text-align:center}
+.bottom{text-align:center;color:var(--muted);font-size:12px;padding:14px 0 22px}
+.sheet{
+  position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;
+  align-items:flex-end;z-index:20
+}
+.sheet.open{display:flex}
+.sheet-card{
+  width:100%;max-height:84vh;background:var(--card);
+  border-radius:28px 28px 0 0;padding:16px;overflow:auto
+}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.close{border:0;background:transparent;font-size:28px;cursor:pointer}
+.search{
+  display:flex;align-items:center;gap:10px;border:1px solid var(--line);
+  border-radius:18px;padding:12px 14px;margin-bottom:12px
+}
+.search input{border:0;outline:0;background:transparent;font-size:16px;width:100%}
+.options{display:grid;gap:3px}
+.option{
+  display:flex;align-items:center;gap:13px;padding:11px 8px;
+  border-bottom:1px solid var(--line);text-decoration:none;color:inherit
+}
+.num{
+  width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;
+  display:grid;place-items:center;flex:none;font-size:14px
+}
+.option strong{color:var(--green);font-size:16px}
+.option small{display:block;margin-top:3px;color:var(--muted)}
+@media(max-width:600px){
+  .selector,.juz{font-size:16px;padding:0 15px}
+  .head h1{font-size:21px}
+  .page-area{padding:8px}
+  .control{padding:10px 13px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+  <a href="quran.html" aria-label="Back">←</a>
+  <div class="title">Al Quran</div>
+  <div class="icon">⌕</div>
+</header>
+
+<div class="selector-row">
+  <button id="selector" class="selector" type="button">
+    <span id="selectedName">Al-Faatiha</span><span>⌄</span>
+  </button>
+  <div class="juz" id="juzLabel">Juz 1</div>
+</div>
+
+<section class="reader">
+  <header class="head">
+    <h1 id="surahTitle">Surah 1 · Al-Faatiha</h1>
+    <div class="ar" id="arabicName">سورة الفاتحة</div>
+  </header>
+
+  <div class="page-area">
+    <div class="page-card">
+      <div id="status" class="status">Loading IndoPak page…</div>
+      <canvas id="pdfCanvas" hidden></canvas>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="prev" class="control" type="button">← Previous</button>
+    <div id="pageCount" class="page-count">—</div>
+    <button id="next" class="control" type="button">Next →</button>
+  </div>
+</section>
+
+<div class="bottom">IndoPak Qur'an source · Daily Duas</div>
+</main>
+
+<div id="sheet" class="sheet">
+  <div class="sheet-card">
+    <div class="sheet-head">
+      <strong>Select Surah</strong>
+      <button id="close" class="close" type="button">×</button>
+    </div>
+    <div class="search">
+      <span>⌕</span>
+      <input id="search" placeholder="Search Surah by name or number…" autocomplete="off">
+    </div>
+    <div id="options" class="options"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+<script type="module">
+import * as pdfjsLib from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
+const surahs = [
+  ["Al-Faatiha",1],["Al-Baqarah",2],["Aal-i-Imraan",3],["An-Nisaa",4],
+  ["Al-Maaida",5],["Al-An'aam",6],["Al-A'raaf",7],["Al-Anfaal",8],
+  ["At-Tawba",9],["Yunus",10],["Hud",11],["Yusuf",12],["Ar-Ra'd",13],
+  ["Ibraaheem",14],["Al-Hijr",15],["An-Nahl",16],["Al-Israa",17],
+  ["Al-Kahf",18],["Maryam",19],["Taa-Haa",20],["Al-Anbiyaa",21],
+  ["Al-Hajj",22],["Al-Mu'minoon",23],["An-Noor",24],["Al-Furqaan",25],
+  ["Ash-Shu'araa",26],["An-Naml",27],["Al-Qasas",28],["Al-Ankaboot",29],
+  ["Ar-Room",30],["Luqmaan",31],["As-Sajda",32],["Al-Ahzaab",33],
+  ["Saba",34],["Faatir",35],["Yaseen",36],["As-Saaffaat",37],["Saad",38],
+  ["Az-Zumar",39],["Ghaafir",40],["Fussilat",41],["Ash-Shura",42],
+  ["Az-Zukhruf",43],["Ad-Dukhaan",44],["Al-Jaathiya",45],["Al-Ahqaaf",46],
+  ["Muhammad",47],["Al-Fath",48],["Al-Hujuraat",49],["Qaaf",50],
+  ["Adh-Dhaariyat",51],["At-Tur",52],["An-Najm",53],["Al-Qamar",54],
+  ["Ar-Rahmaan",55],["Al-Waaqia",56],["Al-Hadid",57],["Al-Mujaadila",58],
+  ["Al-Hashr",59],["Al-Mumtahana",60],["As-Saff",61],["Al-Jumu'a",62],
+  ["Al-Munaafiqoon",63],["At-Taghaabun",64],["At-Talaaq",65],
+  ["At-Tahrim",66],["Al-Mulk",67],["Al-Qalam",68],["Al-Haaqqa",69],
+  ["Al-Ma'aarij",70],["Nooh",71],["Al-Jinn",72],["Al-Muzzammil",73],
+  ["Al-Muddaththir",74],["Al-Qiyaama",75],["Al-Insaan",76],
+  ["Al-Mursalaat",77],["An-Naba",78],["An-Naazi'aat",79],["Abasa",80],
+  ["At-Takwir",81],["Al-Infitaar",82],["Al-Mutaffifin",83],
+  ["Al-Inshiqaaq",84],["Al-Burooj",85],["At-Taariq",86],["Al-A'laa",87],
+  ["Al-Ghaashiya",88],["Al-Fajr",89],["Al-Balad",90],["Ash-Shams",91],
+  ["Al-Lail",92],["Ad-Dhuhaa",93],["Ash-Sharh",94],["At-Tin",95],
+  ["Al-Alaq",96],["Al-Qadr",97],["Al-Bayyina",98],["Az-Zalzala",99],
+  ["Al-Aadiyaat",100],["Al-Qaari'a",101],["At-Takaathur",102],
+  ["Al-Asr",103],["Al-Humaza",104],["Al-Fil",105],["Quraish",106],
+  ["Al-Maa'oon",107],["Al-Kawthar",108],["Al-Kaafiroon",109],
+  ["An-Nasr",110],["Al-Masad",111],["Al-Ikhlaas",112],["Al-Falaq",113],
+  ["An-Naas",114]
+];
+
+const arabic = {
+  1:"الفاتحة",2:"البقرة",3:"آل عمران",4:"النساء",
+  5:"المائدة",6:"الأنعام",7:"الأعراف",8:"الأنفال",9:"التوبة"
+};
+
+/*
+  These are the existing Juz/page targets already used by the project.
+  The reader itself is page-based, so the supplied IndoPak PDFs remain
+  the source of the Arabic, waqf marks and Bismillah.
+*/
+const targets = {
+  1:{juz:1,page:1}, 2:{juz:1,page:2}, 3:{juz:3,page:9},
+  4:{juz:4,page:16}, 5:{juz:6,page:5}, 6:{juz:7,page:7},
+  7:{juz:8,page:10}, 8:{juz:9,page:16}, 9:{juz:10,page:6}
+};
+
+const $ = id => document.getElementById(id);
+let current = Number(new URLSearchParams(location.search).get("surah") || 1);
+if (!surahs.some(s => s[1] === current)) current = 1;
+
+let pdfDoc = null;
+let pageNumber = 1;
+let renderToken = 0;
+
+function setStatus(text){
+  $("status").hidden = false;
+  $("status").textContent = text;
+  $("pdfCanvas").hidden = true;
+}
+function escapeHtml(v){
+  return String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+async function openPdf(juz, page){
+  const token = ++renderToken;
+  setStatus("Loading IndoPak page…");
+  try{
+    const url = `juz${String(juz).padStart(2,"0")}.pdf`;
+    pdfDoc = await pdfjsLib.getDocument(url).promise;
+    if(token !== renderToken) return;
+    pageNumber = Math.max(1, Math.min(page || 1, pdfDoc.numPages));
+    await drawPage();
+  }catch(err){
+    console.error(err);
+    setStatus("The IndoPak page could not be loaded. Please make sure the Juz PDF files are in the same folder as this HTML file.");
+  }
+}
+
+async function drawPage(){
+  if(!pdfDoc) return;
+  const page = await pdfDoc.getPage(pageNumber);
+  const canvas = $("pdfCanvas");
+  const context = canvas.getContext("2d");
+  const boxWidth = Math.max(320, $("page-area")?.clientWidth || $("pageCanvas")?.clientWidth || window.innerWidth*0.9);
+  const base = page.getViewport({scale:1});
+  const scale = Math.min(2.2, Math.max(1.2, (window.innerWidth*0.9)/base.width));
+  const viewport = page.getViewport({scale});
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  canvas.style.width = "100%";
+  canvas.style.height = "auto";
+  canvas.hidden = false;
+  $("status").hidden = true;
+  await page.render({canvasContext:context, viewport}).promise;
+  $("pageCount").textContent = `Page ${pageNumber} of ${pdfDoc.numPages}`;
+  $("prev").disabled = pageNumber <= 1;
+  $("next").disabled = pageNumber >= pdfDoc.numPages;
+}
+
+function setSurah(n){
+  current = n;
+  const found = surahs.find(s => s[1] === current);
+  const name = found ? found[0] : "Al Quran";
+  $("selectedName").textContent = name;
+  $("surahTitle").textContent = `Surah ${current} · ${name}`;
+  $("arabicName").textContent = arabic[current] ? `سورة ${arabic[current]}` : "";
+  const target = targets[current];
+  if(target){
+    $("juzLabel").textContent = `Juz ${target.juz}`;
+    openPdf(target.juz,target.page);
+  }else{
+    $("juzLabel").textContent = "Juz 1–10";
+    pdfDoc = null;
+    setStatus("This Surah is outside the currently uploaded Juz 1–10 source. Add the later Juz source when ready.");
+    $("pageCount").textContent = "—";
+    $("prev").disabled = true;
+    $("next").disabled = true;
+  }
+  history.replaceState(null,"",`quran-surah-indopak.html?surah=${current}`);
+}
+
+function renderOptions(query=""){
+  const q = query.trim().toLowerCase();
+  $("options").innerHTML = surahs
+    .filter(s => !q || String(s[1]) === q || s[0].toLowerCase().includes(q))
+    .map(s => `<button class="option" type="button" data-surah="${s[1]}">
+      <span class="num">${s[1]}</span>
+      <span><strong>${escapeHtml(s[0])}</strong>
+      <small>${targets[s[1]] ? `IndoPak · Juz ${targets[s[1]].juz}` : "Juz source to be added later"}</small></span>
+    </button>`).join("");
+  document.querySelectorAll(".option").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      setSurah(Number(btn.dataset.surah));
+      $("sheet").classList.remove("open");
+    });
+  });
+}
+
+$("selector").onclick=()=>{
+  $("sheet").classList.add("open");
+  $("search").value="";
+  renderOptions();
+  $("search").focus();
+};
+$("close").onclick=()=> $("sheet").classList.remove("open");
+$("sheet").addEventListener("click",e=>{
+  if(e.target === $("sheet")) $("sheet").classList.remove("open");
+});
+$("search").addEventListener("input",()=>renderOptions($("search").value));
+
+$("prev").onclick=async()=>{
+  if(pdfDoc && pageNumber>1){ pageNumber--; await drawPage(); window.scrollTo({top:0,behavior:"smooth"}); }
+};
+$("next").onclick=async()=>{
+  if(pdfDoc && pageNumber<pdfDoc.numPages){ pageNumber++; await drawPage(); window.scrollTo({top:0,behavior:"smooth"}); }
+};
+
+window.addEventListener("resize",()=>{ if(pdfDoc) drawPage(); });
+
+renderOptions();
+setSurah(current);
+</script>
+</body>
+</html>
