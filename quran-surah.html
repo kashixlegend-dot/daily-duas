@@ -31,30 +31,34 @@ const status=document.getElementById('status'),content=document.getElementById('
 function esc(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function parse(text){const out=[];for(const raw of text.replace(/^\uFEFF/,'').split(/\r?\n/)){const p=raw.trim().split('|');if(p.length<3)continue;const s=Number(p[0]),a=Number(p[1]),t=p.slice(2).join('|').trim();if(Number.isInteger(s)&&Number.isInteger(a)&&t)out.push({surah:s,ayah:a,arabic:t})}return out}
 function stripLeadingBismillah(t){
-  // IndoPak text can use different Arabic diacritics/Unicode forms.
-  // Remove a leading Bismillah whenever Ayah 1 contains one.
-  const clean=s=>s.normalize('NFKC')
+  // Remove the Bismillah embedded in Ayah 1.  The Qur'an text file may
+  // contain different Arabic diacritics, spacing, tatweel, or hamza forms.
+  const normalize=s=>String(s).normalize('NFKC')
     .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'')
+    .replace(/ـ/g,'')
     .replace(/[ٱأإآ]/g,'ا')
-    .replace(/ـ/g,'');
-  const c=clean(t);
-  if(!/^\s*بسم\s+الله/.test(c)) return t.trim();
-  const end=c.search(/الرحيم/);
-  if(end<0 || end>180) return t.trim();
-  let cut=end+'الرحيم'.length;
-  // Map the normalized-character cut back to the original string.
-  let normalizedCount=0, originalEnd=0;
+    .replace(/\s+/g,'');
+  const target='بسماللهالرحمنالرحيم';
+  const n=normalize(t);
+  const pos=n.indexOf(target);
+  if(pos<0) return t.trim();
+
+  // Map the normalized position back to the original string.
+  let count=0, begin=-1, end=-1;
   for(let i=0;i<t.length;i++){
-    const one=clean(t[i]);
-    normalizedCount+=one.length;
-    if(normalizedCount>=cut){ originalEnd=i+1; break; }
+    const ch=normalize(t[i]);
+    if(!ch) continue;
+    if(count===pos) begin=i;
+    count+=ch.length;
+    if(count===pos+target.length){ end=i+1; break; }
   }
-  return t.slice(originalEnd).trim();
+  if(begin<0 || end<0) return t.trim();
+  return (t.slice(0,begin)+t.slice(end)).trim();
 }
 function renderOptions(filter=''){const q=filter.trim().toLowerCase();const items=surahs.map((en,i)=>({n:i+1,en})).filter(s=>!q||String(s.n)===q||s.en.toLowerCase().includes(q));options.innerHTML=items.map(s=>`<a class="option" href="quran-surah.html?surah=${s.n}"><span class="num">${s.n}</span><span><strong>${esc(s.en)}</strong></span></a>`).join('')}
 function openSheet(){sheet.classList.add('open');sheetSearch.value='';renderOptions();setTimeout(()=>sheetSearch.focus(),50)}
 document.getElementById('openSelector').onclick=openSheet;document.getElementById('closeSelector').onclick=()=>sheet.classList.remove('open');sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.classList.remove('open')});sheetSearch.addEventListener('input',()=>renderOptions(sheetSearch.value));
-async function load(){try{const r=await fetch(QURAN_FILE,{cache:'no-store'});if(!r.ok)throw Error('Could not load the Qur’an text file.');const all=parse(await r.text()),verses=all.filter(a=>a.surah===currentSurah);if(!verses.length)throw Error('No verses found for this Surah.');const name=surahs[currentSurah-1];selectorName.textContent=name;englishName.textContent=`Surah ${currentSurah} · ${name}`;arabicName.textContent=`سورة ${currentSurah}`;bismillah.style.display=currentSurah===9?'none':'block';ayahsEl.innerHTML=verses.map(v=>{let text=v.arabic;if(v.ayah===1&&currentSurah!==9)text=stripLeadingBismillah(text);if(!text)return '';return `<article class="ayah"><div class="arabic">${esc(text)} <span class="num">${v.ayah}</span></div><div class="tools"><button class="tool" title="Play">▶</button><button class="tool" title="Bookmark">♡</button></div></article>`}).join('');status.hidden=true;content.hidden=false}catch(e){status.className='status error';status.textContent=e.message}}
+async function load(){try{const r=await fetch(QURAN_FILE+'?v=indopak2',{cache:'no-store'});if(!r.ok)throw Error('Could not load the Qur’an text file.');const all=parse(await r.text()),verses=all.filter(a=>a.surah===currentSurah);if(!verses.length)throw Error('No verses found for this Surah.');const name=surahs[currentSurah-1];selectorName.textContent=name;englishName.textContent=`Surah ${currentSurah} · ${name}`;arabicName.textContent=`سورة ${currentSurah}`;bismillah.style.display=currentSurah===9?'none':'block';ayahsEl.innerHTML=verses.map(v=>{let text=v.arabic;if(v.ayah===1&&currentSurah!==9)text=stripLeadingBismillah(text);if(!text)return '';return `<article class="ayah"><div class="arabic">${esc(text)} <span class="num">${v.ayah}</span></div><div class="tools"><button class="tool" title="Play">▶</button><button class="tool" title="Bookmark">♡</button></div></article>`}).join('');status.hidden=true;content.hidden=false}catch(e){status.className='status error';status.textContent=e.message}}
 load();
 </script>
 </body>
