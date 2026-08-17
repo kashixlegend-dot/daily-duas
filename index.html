@@ -3,354 +3,130 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#173f35">
-<title>Daily Duas — Come closer to Allah</title>
-
+<meta name="theme-color" content="#174d42">
+<title>Daily Duas</title>
 <style>
 :root{
   --bg:#f5f2e9;
-  --card:#fffdf8;
-  --ink:#19352e;
-  --muted:#68736e;
-  --green:#2f6b58;
-  --dark:#173f35;
-  --gold:#b28a3b;
-  --line:#e3ded1;
+  --deep:#174d42;
+  --green:#2d7865;
+  --green2:#397f6e;
+  --cream:#fffdf8;
+  --gold:#b18d3f;
+  --ink:#173f37;
+  --muted:#66746f;
+  --line:#ddd9ce;
 }
-
 *{box-sizing:border-box}
-
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-
-header{
-  background:linear-gradient(145deg,#173f35,#2f6b58);
-  color:white;
-  padding:28px 20px 55px;
-  border-radius:0 0 38px 38px;
-}
-
-.wrap{
-  max-width:900px;
-  margin:auto;
-}
-
-.brand{
-  font-size:14px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  opacity:.8;
-}
-
-h1{
-  font-size:42px;
-  line-height:1.08;
-  margin:12px 0;
-}
-
-.hero-text{
-  font-size:18px;
-  line-height:1.6;
-  opacity:.9;
-  max-width:650px;
-}
-
-main{
-  padding:0 18px 40px;
-  margin-top:-25px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding:24px;
-  margin:18px 0;
-  box-shadow:0 8px 25px #173f3510;
-}
-
-.buttons{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
-  margin-top:22px;
-}
-
-a.button{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  padding:15px 18px;
-  border-radius:15px;
-  font-weight:700;
-  font-size:17px;
-  background:var(--green);
-  color:white;
-}
-
-a.button.secondary{
-  background:white;
-  color:var(--ink);
-  border:1px solid var(--line);
-}
-
-.section-title{
-  font-size:25px;
-  margin:5px 0 8px;
-}
-
-.section-text{
-  color:var(--muted);
-  line-height:1.65;
-}
-
-.features{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
-  margin-top:18px;
-}
-
-.feature{
-  padding:18px;
-  border-radius:18px;
-  background:#f0eee5;
-}
-
-.feature-icon{
-  font-size:28px;
-}
-
-.feature-title{
-  font-weight:750;
-  margin-top:7px;
-}
-
-.feature-text{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.5;
-  margin-top:5px;
-}
-
-.quote{
-  text-align:center;
-  font-size:22px;
-  line-height:1.7;
-  font-family:serif;
-}
-
-.quote-source{
-  color:var(--muted);
-  font-size:14px;
-  margin-top:10px;
-}
-
-footer{
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-  padding:30px 18px 45px;
-}
-
-@media(min-width:650px){
-  h1{font-size:58px}
-
-  .buttons{
-    grid-template-columns:1fr 1fr 1fr;
-  }
-
-  .features{
-    grid-template-columns:1fr 1fr 1fr;
-  }
-}
+a{text-decoration:none;color:inherit}
 .nav{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:center;
-  padding:14px 18px;
-  background:#173f35;
-  border-bottom:1px solid #2f6b58;
+  background:var(--deep);padding:18px 14px 22px;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
 }
-
 .nav a{
-  color:#fffdf8;
-  text-decoration:none;
-  padding:10px 14px;
-  border-radius:999px;
-  background:#2f6b58;
-  font-weight:600;
-  font-size:14px;
+  background:var(--green);color:#fff;border-radius:999px;
+  padding:13px 22px;font-size:18px;font-weight:700;
+  transition:.15s ease;
 }
-
-.nav a:hover{
-  background:#b28a3b;
+.nav a:hover{background:var(--green2);transform:translateY(-1px)}
+.wrap{width:min(920px,94%);margin:auto}
+.hero{
+  margin-top:0;background:linear-gradient(145deg,#174d42,#2d7865);
+  color:#fff;border-radius:0 0 54px 54px;padding:54px 28px 62px;
 }
-
-@media(max-width:600px){
-  .nav{
-    gap:7px;
-    padding:10px;
-  }
-
-  .nav a{
-    padding:8px 10px;
-    font-size:13px;
-  }
-}</style>
+.kicker{
+  font-size:15px;letter-spacing:.22em;text-transform:uppercase;
+  opacity:.82;margin-bottom:25px
+}
+.hero h1{
+  font-size:clamp(42px,9vw,76px);line-height:.98;
+  margin:0 0 30px;letter-spacing:-.045em;max-width:760px
+}
+.hero p{
+  font-size:clamp(19px,4vw,27px);line-height:1.55;
+  margin:0;max-width:760px;color:#f3f4ef
+}
+.grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;margin:28px 0 48px
+}
+.card{
+  background:var(--cream);border:1px solid var(--line);
+  border-radius:28px;padding:27px;box-shadow:0 3px 14px rgba(23,63,55,.05)
+}
+.card h2{margin:0 0 9px;font-size:25px}
+.card p{margin:0 0 20px;color:var(--muted);line-height:1.55}
+.btn{
+  display:inline-block;background:var(--green);color:#fff;
+  border-radius:999px;padding:11px 17px;font-weight:700
+}
+.section{
+  background:var(--cream);border:1px solid var(--line);
+  border-radius:32px;padding:30px;margin-bottom:26px
+}
+.section h2{font-size:30px;margin:0 0 10px}
+.section p{color:var(--muted);line-height:1.6}
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.quick a{
+  border:1px solid var(--line);border-radius:20px;padding:18px;
+  text-align:center;font-weight:700;background:#faf8f1
+}
+footer{text-align:center;color:var(--muted);padding:10px 20px 40px}
+@media(max-width:650px){
+  .nav a{font-size:16px;padding:12px 17px}
+  .hero{padding:45px 24px 52px}
+  .grid{grid-template-columns:1fr}
+  .quick{grid-template-columns:1fr}
+}
+</style>
 </head>
-
 <body>
-  <nav class="nav">
+
+<nav class="nav" aria-label="Main navigation">
   <a href="index.html">🏠 Home</a>
-  <a href="duas.html#duas">🤲 Duas</a>
+  <a href="duas.html">🤲 Duas</a>
   <a href="names.html">🕋 Allah's Names</a>
   <a href="quran.html">📖 Qur'an</a>
   <a href="favorites.html">⭐ Favorites</a>
-  </nav>
+</nav>
 
-<header>
+<header class="hero">
   <div class="wrap">
-    <div class="brand">🌙 Daily Duas</div>
-
+    <div class="kicker">🌙 Daily Duas</div>
     <h1>Come closer to Allah, one dua at a time.</h1>
-
-    <p class="hero-text">
-      Authentic duas, beautiful reminders, the Names of Allah,
-      and Qur'anic guidance — gathered in one peaceful place.
-    </p>
+    <p>Authentic duas, beautiful reminders, the Names of Allah, and Qur'anic guidance — gathered in one peaceful place.</p>
   </div>
 </header>
 
 <main class="wrap">
+  <section class="grid">
+    <article class="card">
+      <h2>🤲 Begin with a Dua</h2>
+      <p>Read, reflect, copy, and save daily supplications in a calm reading experience.</p>
+      <a class="btn" href="duas.html">Open Duas</a>
+    </article>
+    <article class="card">
+      <h2>📖 Qur'an</h2>
+      <p>Continue to the Qur'an section and keep the reading experience separate from the daily-dua content.</p>
+      <a class="btn" href="quran.html">Open Qur'an</a>
+    </article>
+  </section>
 
-  <section class="card">
-
-    <h2 class="section-title">🤲 Begin with today's duas</h2>
-
-    <p class="section-text">
-      Take a few moments today to remember Allah, make dua,
-      and reflect on His words.
-    </p>
-
-    <div class="buttons">
-      <a class="button" href="index.html">
-        🤲 Today's Duas
-      </a>
-
-      <a class="button secondary" href="names.html">
-        🕋 Names of Allah
-      </a>
-
-      <a class="button secondary" href="index.html">
-        📖 Browse Duas
-      </a>
+  <section class="section">
+    <h2>Explore the library</h2>
+    <p>Everything important stays one tap away, without changing the content you already use.</p>
+    <div class="quick">
+      <a href="duas.html">🤲 Daily Duas</a>
+      <a href="names.html">🕋 99 Names</a>
+      <a href="favorites.html">⭐ Favorites</a>
     </div>
-
   </section>
-
-
-  <section class="card">
-
-    <h2 class="section-title">✨ What you'll find here</h2>
-
-    <div class="features">
-
-      <div class="feature">
-        <div class="feature-icon">🤲</div>
-        <div class="feature-title">Authentic Duas</div>
-        <div class="feature-text">
-          Qur'an and Sunnah duas with their references.
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">📅</div>
-        <div class="feature-title">Daily Selection</div>
-        <div class="feature-text">
-          Different duas are presented automatically each day.
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🕋</div>
-        <div class="feature-title">99 Names of Allah</div>
-        <div class="feature-text">
-          Learn His beautiful Names and reflect on their meanings.
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">⭐</div>
-        <div class="feature-title">Favorites</div>
-        <div class="feature-text">
-          Save the duas and Names that are meaningful to you.
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🔎</div>
-        <div class="feature-title">Search</div>
-        <div class="feature-text">
-          Find a dua by topic, wording, or reference.
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">📖</div>
-        <div class="feature-title">Qur'an</div>
-        <div class="feature-text">
-          Discover duas directly connected to the Qur'an.
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="card">
-
-    <div class="quote">
-      وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ
-
-      <div class="quote-source">
-        “Call upon Me; I will respond to you.”
-        <br>
-        Qur'an 40:60
-      </div>
-    </div>
-
-  </section>
-
-
-  <section class="card">
-
-    <h2 class="section-title">🌿 A peaceful place for remembrance</h2>
-
-    <p class="section-text">
-      Whether you are beginning your morning, preparing for sleep,
-      looking for guidance, seeking forgiveness, or simply wanting
-      to remember Allah — Daily Duas is being built to make that
-      journey simple and beautiful.
-    </p>
-
-  </section>
-
 </main>
 
-<footer>
-  Daily Duas 🌙
-  <br>
-  Built with the intention of spreading beneficial knowledge.
-  <br><br>
-  In shā' Allāh, more features coming soon.
-</footer>
-
+<footer>May Allah make it beneficial. Ameen.</footer>
 </body>
 </html>
